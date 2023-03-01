@@ -1,25 +1,16 @@
-<section class="project-section py-3">
+<section class="education-section py-3">
   <h3 class="text-uppercase resume-section-heading mb-4">
     {{ i18n "talks" }}
   </h3>
 
-  {{ range .Site.Params.talks.list }}
-  <div class="item mb-3">
-    <div class="item-heading row align-items-center mb-2">
-      <h4 class="item-title col-12 col-md-6 col-lg-6 mb-2 mb-md-0">
-        <a href="{{ .url }}" target="_blank"> {{ .title }}</a>
-      </h4>
-      <div
-        class="item-meta col-12 col-md-6 col-lg-6 text-muted text-left text-md-right"
-      >
-        {{ .meta }}
-      </div>
-    </div>
-    <div class="item-content">
-      <p>{{ .tagline }}</p>
-    </div>
-  </div>
-  <!--//item-->
-  {{ end }}
+  <ul class="list-unstyled resume-awards-list">
+    {{ range .Site.Params.talks.list }}
+    <li class="mb-3">
+      <div class="font-weight-bold">{{ .name }}</div>
+      <div class="text-muted">{{ .body }}</div>
+      <div class="text-muted">{{ .date }}</div>
+    </li>
+    {{ end }}
+  </ul>
 </section>
-<!--//project-section-->
+<!--//education-section-->
