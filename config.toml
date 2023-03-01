@@ -1,29 +1,29 @@
 # Page settings
 
-baseURL = "https://resume-demo.bas.work/"
+baseURL = "https://resume.davidpacold.dev/"
 languageCode = "en"
 title = "David Pacold"
 enableGitInfo = false
-googleAnalytics = "UA-XXXXXXX-Y"
+googleAnalytics = "G-40ML6KMXQ1"
 
 [params]
-    author = "John Doe"
-    description = "Demo Resume"
+    author = "David Pacold"
+    description = "My Resume"
     og_image = "better-software.png"
-    twitterName = "@bascodes"
-    ghRepo = "https://github.com/codewithbas/resume/"
+#   twitterName = "@davidpacold"
+    ghRepo = "https://github.com/davidpacold/resume/"
     hugoRepo = "https://github.com/gohugoio/hugo/"
 
     [params.profile]
         enable = true
-        name = "John Doe"
-        tagline = "Demo Resume"
-        avatar = "bas-steins-2.jpg"
+        name = "David Pacold"
+        tagline = "My Resume"
+        avatar = "david-pacold-profile.jpeg"
 
     [params.contact]
         enable = true
 
-        location = "Somewhere in the world"
+        location = "Atlanta GA"
 
         [[params.contact.list]]
         icon = "fas fa-phone-square"
@@ -31,48 +31,74 @@ googleAnalytics = "UA-XXXXXXX-Y"
         text = "confidential"
         [[params.contact.list]]
         icon = "fas fa-envelope-square"
-        url = "mailto:mail@example.org"
-        text = "mail@example.org"
+        url = "mailto:david.pacold@gmail.com"
+        text = "david.pacold@gmail.com"
         [[params.contact.list]]
         icon = "fas fa-globe"
-        url = "https://bas.bio"
-        text = "My links on the web"
+        url = "https://blog.davidpacold.com"
+        text = "My blog posts"
 
 
     [params.skills]
         enable = true
 
         [[params.skills.list]]
-        title = "Python"
+        title = "Sales"
         [[params.skills.list]]
-        title = "Lua"
+        title = "Engineering"
         [[params.skills.list]]
-        title = "LISP"
+        title = "Problem Soliving"
 
 
     [params.education]
         enable = true
 
         [[params.education.list]]
-        degree = "Master of Desaster"
-        university = "University of Life"
-        dates = "1990-present"
+        degree = "Bachelor of Applied Science Computer Networking"
+        university = "Boise State University"
+        dates = "2002 - 2007"
 
 
     [params.awards]
         enable = true
 
         [[params.awards.list]]
-        name = "Professional Scrum Master™ I"
-        body = "scrum.org"
-        date = "2018"
+        name = "Global Top Performer"
+        body = "VMware"
+#        date = "2018"
+
+        [[params.awards.list]]
+        name = "Best Competitive Takeout"
+        body = "VMware"
+#        date = "2018"
+
+        [[params.awards.list]]
+        name = "SE Spotlight Best Employee Experience Sale"
+        body = "VMware"
+#        date = "2018"
+
+        [[params.awards.list]]
+        name = "Global SE of the Year Finalist"
+        body = "VMware"
+#        date = "2020"
+
+        [[params.awards.list]]
+        name = "SE Spotlight Award"
+        body = "VMware"
+#        date = "2020"
+
+        [[params.awards.list]]
+        name = "CTO Ambassador program and Principal Engineer candidate"
+        body = "VMware"
+#        date = "2020"
+
 
 
     [params.languages]
         enable = true
 
         [[params.languages.list]]
-        name = "Klingon"
+        name = "Tech lingo"
         level = "Fluent"
 
         [[params.languages.list]]
@@ -84,36 +110,216 @@ googleAnalytics = "UA-XXXXXXX-Y"
         enable = true
 
         [[params.interests.list]]
-        name = "Counting Sheeps"
+        name = "Problem Solving"
+        [[params.interests.list]]
+        name = "Computer Networking"
+        [[params.interests.list]]
+        name = "Skiing"
+
+
+[params.talks]
+        enable = true
+
+        [[params.talks.list]]
+        name = "Speaker at the Global AirWatch Connect 2014, 2015 and 2016 events"
+        [[params.talks.list.items]]
+        body = "Airwatch"
+
+        [[params.talks.list]]
+        name = "Speaker at VMworld Barcelona 2017"
+        [[params.talks.list.items]]
+        body = "VMware"
 
 
     [params.summary]
         enable = true
-        text = "I am the 10 eggs developer you are looking for."
+        text = "Results driven and solutions-oriented Sales Engineer. Proven track record of growing sales and leading the technical sales process. My goal is to work in a challenging position in which I can leverage my experience and passion for technology to establish a role as a technology evangelist, thought leader and advisor to our customers, and those who aren’t, but will be with a little guiding hand. Recognized for my ability to explain complex topics clearly and concisely, and effective at providing practical guidance and maintaining a problem-solver mindset."
 
 
     [params.experience]
         enable = true
 
         [[params.experience.list]]
-        title = "Intern"
-        dates = "2000 - Present"
-        company = "Compuglobal Hyper Mega Net"
-        details = "Increased the baudrate for comic book guy"
+        title = "Sales Engineer"
+        dates = "January 2022 - Present"
+        company = "Cloudflare"
+        details = "As a member of the Solutions Engineering team I serve as a trusted advisor to our customers; helping them find the best solution for their business needs with Cloudflare. I am a trusted source for developing new firewall rules from log files, crafting performance caching and delivery strategies, and creating or repurposing internal tools and scripts for customers."
         [[params.experience.list.items]]
-        details = "Took buttery notes"
+        details = "Presented the Cloudflare story and vision to customers"
+        [[params.experience.list.items]]
+        details = "Translated technical concepts and jargon for a wide variety of audiences: from systems engineers, to front-end developers, through to IT managers"
+        [[params.experience.list.items]]
+        details = "Quickly gained a deep technical understanding of the Cloudflare tool set"
+        [[params.experience.list.items]]
+        details = "Ran technical POC sessions for the core Cloudflare platform"
+        [[params.experience.list.items]]
+        details = "Ran technical POC sessions for Zero Trust products"
+        [[params.experience.list.items]]
+        details = "Was a session leader for the second round of the Code Club workshop series"
 
+        [[params.experience.list]]
+        title = "Sales Engineer"
+        dates = "2021 - 2022"
+        company = "Nexthink"
+        details = "Not just the leader in the digital employee experience category, we invented the category. Our solutions combine real-time analytics, automation and employee feedback across all endpoints to help IT teams delight people at work. Our cloud-native platform pinpoints issues and solutions, automates response, and helps companies continuously improve their employees’ experience, making them more productive, efficient, and happy at work"
+        [[params.experience.list.items]]
+        details = "Help the sales team qualify leads by using your deep understanding of product capabilities to address business issues and provide business value."
+        [[params.experience.list.items]]
+        details = "Demonstrate how Nexthink solutions can support overall customer initiatives and how this generates the business outcome."
+        [[params.experience.list.items]]
+        details = "Work with multiple stakeholders in different functions such as End User Computing, Workplace Management, IT Operations and IT Leadership to illustrate use cases where Nexthink can add value. This requires strong account management capability as well as a passion and enthusiasm for introducing disruptive technology."
+        [[params.experience.list.items]]
+        details = "Support and lead large-scale enterprise transactions as a Solution Consultant by using industry knowledge and understanding to move deals forward"
+        [[params.experience.list.items]]
+        details = "Run and facilitate value-based workshops with prospects so that they can fully discover and understand how Nexthink can address their strategic projects and major issues"
+        [[params.experience.list.items]]
+        details = "Conduct Proof of Values"
+
+        [[params.experience.list]]
+        title = "Principal Sales Engineer"
+        dates = "2021 - 2021"
+        company = "Twilio"
+        details = "Twilio is enabling our customers to build the future of communications. As a member of the Solutions Engineering team I am part of the sales team that is facilitating this modernization of communications."
+        [[params.experience.list.items]]
+        details = "Demonstrated the best way to use Twilio products to achieve their business goals"
+        [[params.experience.list.items]]
+        details = "Built a deep understanding of a customer's communications needs and guide them to a technical solution"
+        [[params.experience.list.items]]
+        details = "Built custom functionality demos using REST API's and low code tools to resolve customer functionality requests"
+        [[params.experience.list.items]]
+        details = "Developed an application using the Twilio APIs and Node JS"
+        [[params.experience.list.items]]
+        details = "Demonstrated my application as part of an App bootcamp to earn my Twilio Red Jacket"
+        [[params.experience.list.items]]
+        details = "Wrote a blog post on building an app using Twilio API's, getting over 25,000 impressions on LinkedIn generating almost 800 unique blog page views"
+
+        [[params.experience.list]]
+        title = "Global Staff Solution Architect"
+        dates = "2018 - 2021"
+        company = "VMware"
+        details = "As a member of the VMware EUC SE Global Pre-Sales team, I evangelized VMware business value and technical benefits to senior level business and technology decision makers at VMware’s largest and most strategic customers as well being instrumental in solution development around Digital Workspace initiatives."
+        [[params.experience.list.items]]
+        details = "Helped evangelize VMware's digital workspace journey story, meeting regularly with leaders across VMware's Global accounts in major verticals (including Telecommunications, Oil and Gas, Manufacturing and Retail) through Executive Briefing Sessions"
+        [[params.experience.list.items]]
+        details = "Mentored new team members and coached them to be successful in the Global SE role"
+        [[params.experience.list.items]]
+        details = "Participated in and recorded a Success Story podcast about earning customer trust and becoming a trusted advisor, sharing best practices with colleagues"
+        [[params.experience.list.items]]
+        details = "CTO Ambassador program and Principal Engineer candidate"
+        [[params.experience.list.items]]
+        details = "Part of the sales team that won one of the largest to date End User Computing deals"
+        [[params.experience.list.items]]
+        details = "Directly responsible for the technical evaluation of the suite of VMware technology and End User Computing products, inclusive of macOS, iOS, Android and Windows 10 management, Identity and Access control, and Virtual Apps and Desktops with the Workspace ONE suite"
+        [[params.experience.list.items]]
+        details = "Responsible for developing and presenting product demos that included our extended Dell Technology family of products, for use at Executive Briefing sessions to demonstrate the value of our portfolio of technology"
+        [[params.experience.list.items]]
+        details = "Overcame technical challenges and business objections by leveraging personal knowledge and experience and engaging with peers inside of VMware to deliver compelling points of view in original ways"
+        [[params.experience.list.items]]
+        details = "Responsible for translating technical wins into business outcomes to drive return on investment value from the technical solution"
+        [[params.experience.list.items]]
+        details = "Worked with Product Management and Development teams to evaluate customer feedback on product features and market direction to ensure we were able to meet complex requirements"
+        [[params.experience.list.items]]
+        details = "Developed product integration strategies and wrote personal public blog posts based on customer questions to address advanced questions"
+
+        [[params.experience.list]]
+        title = "IoT Alliance Architect"
+        dates = "2017 - 2018"
+        company = "VMware"
+        details = "As the IoT Alliance Architect I was a high impact, very visible and inspirational role in driving a \"future bet\" development of VMware IoT products, influencing new products/solutions, and product improvements that VMware was evaluating bringing to market. I was responsible for engaging with clients at many levels (Solution Architects, VPs, Directors of IT, and Technical Administrators); building relationships, evangelizing VMware solutions, and providing domain expertise to assess go to market viability."
+        [[params.experience.list.items]]
+        details = "Selected to contribute to a \"future bet\" startup team building VMware's IoT Solution"
+        [[params.experience.list.items]]
+        details = "Quickly became a leader among the team and a trusted advisor for both internal and external resource"
+        [[params.experience.list.items]]
+        details = "Worked with Partners and the open-source community to develop strategies and product demos"
+        [[params.experience.list.items]]
+        details = "Quickly became a leader among the team and a trusted advisor for both internal and external resources"
+        [[params.experience.list.items]]
+        details = "Responsible for supporting VMware and other company marketing events, such as Mobile World Congress, Dell World, SAP Sapphire, VMworld"
+        [[params.experience.list.items]]
+        details = "Developed an IoT Training curriculum, and trained ~30 individuals from our IoT Partners in Europe"
+        [[params.experience.list.items]]
+        details = "Developed an IoT Training curriculum for internal VMware use and gave 2 rounds of classroom hands on training"
+        [[params.experience.list.items]]
+        details = "Owned the creation of a publicly available VMware Hands on Lab for our Pulse IoT V1 release"
+        [[params.experience.list.items]]
+        details = "Directly responsible for Building and maintained our IoT demo environments used by the team to showcase our solution"
+        [[params.experience.list.items]]
+        details = "Configured and prepared both hardware and software equipment for customer POC's"
+        [[params.experience.list.items]]
+        details = "Drove product features and roadmap, working in partnership with Product Management, Software Engineering, and Marketing"
+        [[params.experience.list.items]]
+        details = "Lead key customer facing meeting and events, particularly \"Cx\" level discussions"
+        [[params.experience.list.items]]
+        details = "Delivered solution demonstrations that focused on the customers desired outcomes"
+        [[params.experience.list.items]]
+        details = "Built and performed custom product demonstrations outlining both the functional and technical value propositions of the solution"
+        [[params.experience.list.items]]
+        details = "Presented a solution overview at the Global VMworld 2017 conference in Barcelona"
+        
+
+        [[params.experience.list]]
+        title = "Enterprise Sales Engineer"
+        dates = "2013 - 2017"
+        company = "VMware"
+        details = "As a Sales Engineer in End User Computing, we were revolutionizing the way businesses delivered and controlled devices and applications in the enterprise. I was responsible for selling the business value and technical benefits of VMware to senior level business and technology decision makers as well was instrumental in solution development around Digital Workspace initiatives."
+        [[params.experience.list.items]]
+        details = "Performed solution overviews for industry awards, winning the SIIA CODiE award for one of our Mobile Applications"
+       [[params.experience.list.items]]
+        details = "Selected to present Technical Product sessions at the global AirWatch Connect 2014, 2015 and 2016 events, as well as VMworld 2017"
+       [[params.experience.list.items]]
+        details = "Mentored new team members"
+       [[params.experience.list.items]]
+        details = "Drove the Healthcare sales team to be one of the top performing verticals, achieving well over 100% of quota in multiple quarters in 2015"
+       [[params.experience.list.items]]
+        details = "I was the Sales Engineer on the largest revenue deal company wide in Q3 of 2014"
+       [[params.experience.list.items]]
+        details = "Worked closely with customers to demonstrate the business value of our solutions, not only the technical problem resolution"
+       [[params.experience.list.items]]
+        details = "Thrived in the dynamic explosive growth environment we were in at the time"
+       [[params.experience.list.items]]
+        details = "Presented and facilitated our customer outreach events, and user group sessions across the US"
+
+
+        [[params.experience.list]]
+        title = "Professional Services Consultant"
+        dates = "2012 - 2013"
+        company = "AirWatch"
+        details = "I was a member of a high performing global team that had a direct positive impact on customer adoption of AirWatch, during an extremely rapid growth period. As a trusted technical advisor my role was to help our most important customers accelerate time to value by successfully delivering an implemented project on time and budget."
+        [[params.experience.list.items]]
+        details = "Provided \"white glove\" implementation services for our largest customers across different business verticals"
+        [[params.experience.list.items]]
+        details = "Deployed solutions leveraging iOS devices in the cockpit of airplanes"
+        [[params.experience.list.items]]
+        details = "Lead end-user training though both on-site and remote sessions"
+        [[params.experience.list.items]]
+        details = "Established clear and accurate project timelines and schedules, earning customer support"
+        [[params.experience.list.items]]
+        details = "Coordinated project status tracking and issue prioritization for implementation tasks"
+        [[params.experience.list.items]]
+        details = "Supported deployments with integrations into existing enterprise infrastructure, including Active Directory, Certificate Authorities and Email systems"
 
 
     [params.projects]
         enable = true
 
         [[params.projects.list]]
-        title = "This Resume"
-        meta = "GitHub project"
-        url = "https://github.com/codewithbas/resume"
-        tagline = "A resume with a free PDF generator"
+        title = "Building an SMS Survey"
+        meta = "GitHub project and Blog post"
+        url = "https://blog.davidpacold.com/building-a-sms-survey-with-twilio-and-airtable"
+        tagline = "SMS Based Survey with Twilio and Airtable"
 
+        [[params.projects.list]]
+        title = "Building a Twilio App"
+        meta = "GitHub project and Blog post"
+        url = "https://blog.davidpacold.com/my-frist-twilio-app"
+        tagline = "My first Twilio app"
+
+        [[params.projects.list]]
+        title = "Workspace One Event based workflows"
+        meta = "Blog post"
+        url = "https://blog.davidpacold.com/ws1-uem-event-notifications"
+        tagline = "Automating Workspace ONE UEM with APIs and Events"
 
     [params.information]
         enable = false
@@ -127,20 +333,20 @@ googleAnalytics = "UA-XXXXXXX-Y"
 
         [[params.information.list]]
         title = "Interests"
-        details = "Cooking, Beekeeping, Cycling"
+        details = "Cooking, Skiing, Cycling"
 
     [params.social]
         enable = true
 
         [[params.social.list]]
         icon = "fab fa-github-square"
-        url = "https://github.com/codewithbas"
-        title = "/codewithbas"
+        url = "https://github.com/davidpacold"
+        title = "/davidpacold"
         [[params.social.list]]
         icon = "fab fa-linkedin"
-        url = "https://linkedin.com/in/bascodes"
-        title = "/in/bascodes"
-        [[params.social.list]]
-        icon = "fab fa-twitter-square"
-        url = "https://twitter.com/bascodes"
-        title = "@bascodes"
+        url = "https://linkedin.com/in/davidpacold"
+        title = "/in/davidpacold"
+#        [[params.social.list]]
+#        icon = "fab fa-twitter-square"
+#        url = "https://twitter.com/bascodes"
+#        title = "@bascodes"
