@@ -43,11 +43,15 @@ googleAnalytics = "G-40ML6KMXQ1"
         enable = true
 
         [[params.skills.list]]
-        title = "Sales"
+        title = "Presentation skills"
         [[params.skills.list]]
-        title = "Engineering"
+        title = "Selling to customer needs"
         [[params.skills.list]]
-        title = "Problem Soliving"
+        title = "Problem solving"
+        [[params.skills.list]]
+        title = "Resilience"
+        [[params.skills.list]]
+        title = "Technical understanding"
 
 
     [params.education]
@@ -92,6 +96,10 @@ googleAnalytics = "G-40ML6KMXQ1"
         body = "VMware"
 #        date = "2020"
 
+#        [[params.awards.list]]
+#        name = "Peer Recognition Award"
+#        body = "Cloudflare"
+#        date = "2022"
 
 
     [params.languages]
