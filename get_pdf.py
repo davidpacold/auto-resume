@@ -19,6 +19,7 @@ def get(fmt="Letter"):
         "paperSize": fmt,
         "orientation": "Portrait",
         "printBackground": True,
+        "header": " ",
 #       "header": f"AUTO GENERATED FROM RESUME.BAS.WORK WITH {uid} @ {at}",
         "footer": "",
         "mediaType": "print",
