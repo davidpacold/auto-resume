@@ -43,15 +43,19 @@ googleAnalytics = "G-40ML6KMXQ1"
         enable = true
 
         [[params.skills.list]]
-        title = "Presentation skills"
+        title = "Technical knowledge"
+        [[params.skills.list]]
+        title = "Communication"
         [[params.skills.list]]
         title = "Selling to customer needs"
         [[params.skills.list]]
+        title = "Presentation and demos"
+        [[params.skills.list]]
         title = "Problem solving"
         [[params.skills.list]]
-        title = "Resilience"
+        title = "Time management"
         [[params.skills.list]]
-        title = "Technical understanding"
+        title = "Teamwork"
 
 
     [params.education]
@@ -96,9 +100,9 @@ googleAnalytics = "G-40ML6KMXQ1"
         body = "VMware"
 #        date = "2020"
 
-#        [[params.awards.list]]
-#        name = "Peer Recognition Award"
-#        body = "Cloudflare"
+        [[params.awards.list]]
+        name = "Peer Recognition Award"
+        body = "Cloudflare"
 #        date = "2022"
 
 
@@ -153,17 +157,21 @@ googleAnalytics = "G-40ML6KMXQ1"
         company = "Cloudflare"
         details = "As a member of the Solutions Engineering team I serve as a trusted advisor to our customers; helping them find the best solution for their business needs with Cloudflare. I am a trusted source for developing new firewall rules from log files, crafting performance caching and delivery strategies, and creating or repurposing internal tools and scripts for customers."
         [[params.experience.list.items]]
-        details = "Presented the Cloudflare story and vision to customers"
+        details = "Extensive knowledge of Cloudflare's products and services, and the ability to articulate their value proposition to potential customers"
         [[params.experience.list.items]]
-        details = "Translated technical concepts and jargon for a wide variety of audiences: from systems engineers, to front-end developers, through to IT managers"
+        details = "Skilled in conducting product demos, delivering technical presentations, and providing training to customers and partners"
         [[params.experience.list.items]]
-        details = "Quickly gained a deep technical understanding of the Cloudflare tool set"
+        details = "Demonstrated ability to understand and explain complex technical concepts to non-technical stakeholders"
         [[params.experience.list.items]]
-        details = "Ran technical POC sessions for the core Cloudflare platform"
+        details = "Proven track record of successfully completing and closing the Technial portion of new business opportunities"
         [[params.experience.list.items]]
-        details = "Ran technical POC sessions for Zero Trust products"
+        details = "Ran technical POC sessions for Cloudflare Application Sercurity, Performance, Network Services and Zero Trust"
         [[params.experience.list.items]]
-        details = "Was a session leader for the second round of the Code Club workshop series"
+        details = "Experience in creating and delivering technical proposals and RFP responses"
+        [[params.experience.list.items]]
+        details = "Strong communication and interpersonal skills, with the ability to build relationships with customers and partners"
+        [[params.experience.list.items]]
+        details = "Instructor for an internal Code Club workshop series"
 
         [[params.experience.list]]
         title = "Sales Engineer"
