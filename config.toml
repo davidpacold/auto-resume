@@ -108,8 +108,12 @@ googleAnalytics = "G-40ML6KMXQ1"
         [[params.awards.list]]
         name = "Cloudflare Pitch Certified"
         body = "Cloudflare"
-#        date = "2023"
+#        date = "Feb 2023"
 
+        [[params.awards.list]]
+        name = "Cloudflare Thought Leadership Program"
+        body = "Cloudflare"
+#        date = "August 2023"
 
     [params.languages]
         enable = true
