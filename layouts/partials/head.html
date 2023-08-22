@@ -49,6 +49,10 @@
 
 
 
+<!-- Google Analytics internal template -->
+{{- if .Site.GoogleAnalytics }}
+    {{ template "_internal/google_analytics.html" . }}
+{{- end}}
 
 <!-- Google Fonts -->
 <link

@@ -4,7 +4,7 @@ baseURL = "https://resume.davidpacold.dev/"
 languageCode = "en"
 title = "David Pacold"
 enableGitInfo = false
-googleAnalytics = "G-40ML6KMXQ1"
+googleAnalytics = 'G-40ML6KMXQ1'
 
 [params]
     author = "David Pacold"
