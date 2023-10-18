@@ -115,6 +115,11 @@ googleAnalytics = 'G-40ML6KMXQ1'
         body = "Cloudflare"
 #        date = "August 2023"
 
+        [[params.awards.list]]
+        name = "Cloudflare SE of the Quarter"
+        body = "Cloudflare"
+#        date = "October 2023"
+
     [params.languages]
         enable = true
 
