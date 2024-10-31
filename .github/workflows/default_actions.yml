@@ -3,7 +3,7 @@ name: run main.py
 on:
   push:
     branches:
-      - main
+      - default_main
 
 jobs:
   build:

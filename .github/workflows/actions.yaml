@@ -1,0 +1,64 @@
+name: Generate PDFs and Merge to Main
+
+on:
+  push:
+    branches:
+      - update-content  # Trigger when pushing to the update-content branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v3
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Setup hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.110.0"
+          extended: true
+
+      - name: Build Website
+        run: hugo --minify
+
+      - name: generate PDFs
+        env:
+          PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
+          RESUME_URL: ${{ vars.RESUME_URL }}
+        run: |
+          mkdir -p static_pdf
+          python get_pdf.py
+          cp static_pdf/*.pdf ./static/
+          cp static_pdf/*.pdf ./public/
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "Update PDFs"
+
+      - name: Push changes back to update-content branch
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: update-content
+
+      - name: Create Pull Request to Main
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
+          branch: update-content
+          title: "Auto-generated PDF Update"
+          body: "This PR updates the generated PDFs."
