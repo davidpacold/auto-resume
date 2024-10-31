@@ -155,6 +155,11 @@ googleAnalytics = 'G-40ML6KMXQ1'
         name = "Speaker at VMworld Barcelona 2017"
         [[params.talks.list.items]]
         body = "VMware"
+        
+        [[params.talks.list]]
+        name = "Speaker at Cloudflare Immerse Atlanta 2024"
+        [[params.talks.list.items]]
+        body = "Cloudflare"
 
 
     [params.summary]

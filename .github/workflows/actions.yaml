@@ -31,12 +31,12 @@ jobs:
       - name: Build Website
         run: hugo --minify
 
-      - name: generate PDFs
+      - name: generate PDFs # run main.py
         env:
           PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
           RESUME_URL: ${{ vars.RESUME_URL }}
         run: |
-          mkdir -p static_pdf
+          mkdir static_pdf
           python get_pdf.py
           cp static_pdf/*.pdf ./static/
           cp static_pdf/*.pdf ./public/
