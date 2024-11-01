@@ -54,7 +54,12 @@ if __name__ == "__main__":
     os.makedirs("static_pdf", exist_ok=True)
     
     # Generate PDFs in specified formats
+<<<<<<< Updated upstream
     fmts = ['Letter', 'A4']
+=======
+#    fmts = ['Letter', 'A4']
+    fmts = ['Letter']
+>>>>>>> Stashed changes
     for fmt in fmts:
         pdf_path = get(fmt=fmt)
         if pdf_path:
