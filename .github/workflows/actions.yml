@@ -54,7 +54,7 @@ jobs:
               -H "Content-Type: application/json")
             preview_url=$(echo "$response" | jq -r '.result[] | select(.deployment_trigger.metadata.branch=="content-update") | .url' | head -n 1)
             if [ -n "$preview_url" ]; then
-              echo "URL=$preview_url" >> $GITHUB_ENV
+              echo "::set-output name=url::$preview_url"
               break
             fi
             echo "Waiting for preview deployment..."
@@ -66,16 +66,15 @@ jobs:
           fi
 
       - name: Print Preview URL
-        run: echo "Preview URL: ${{ env.URL }}"
-        
+        run: echo "Preview URL: ${{ steps.get-preview-url.outputs.url }}"
+
       - name: Wait for Deployment to be Ready
         run: sleep 120
   
-
       - name: Generate PDFs
         env:
           PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
-          RESUME_URL: ${{ env.URL }}  # Use the retrieved preview URL
+          RESUME_URL: ${{ steps.get-preview-url.outputs.url }}  # Use the retrieved preview URL
         run: |
           mkdir -p static_pdf
           python get_pdf.py
