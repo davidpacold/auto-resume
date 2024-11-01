@@ -11,12 +11,12 @@ jobs:
     steps:
 
       - name: checkout repo content
-        uses: actions/checkout@v3 # checkout the repository content to github runner
+        uses: actions/checkout@v3
 
       - name: setup python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9' # install the python version needed
+          python-version: '3.9'
           
       - name: install python packages
         run: |
@@ -32,7 +32,7 @@ jobs:
       - name: Build Website
         run: hugo --minify
 
-      - name: generate PDFs # run main.py
+      - name: generate PDFs
         env:
           PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
           RESUME_URL: ${{ vars.RESUME_URL }}
@@ -63,5 +63,10 @@ jobs:
           branch: content-update
           title: "Auto-generated PDF Update"
           body: "This PR updates the generated PDFs from content-update branch."
-          merge_method: rebase  # Optional: Choose your preferred merge method (merge, squash, or rebase)
-          draft: false  # Optional: Set to true if you want a draft PR
+
+      - name: Enable auto-merge on the PR
+        uses: peter-evans/enable-pull-request-automerge@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          pull-request-number: ${{ steps.Create-Pull-Request-to-Main.outputs.pull-request-number }}
+          merge-method: rebase  # Optional: choose your merge method (merge, squash, or rebase)
