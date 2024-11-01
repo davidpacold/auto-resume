@@ -41,4 +41,3 @@ if __name__ == "__main__":
     fmts = ['Letter', 'A4']
     for fmt in fmts:
         get(fmt=fmt).rename(f"static_pdf/resume.{fmt.lower()}.pdf")
-
