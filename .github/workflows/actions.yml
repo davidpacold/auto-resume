@@ -1,29 +1,29 @@
-name: run main.py
+name: Generate PDFs and Deploy to Cloudflare Pages
 
 on:
   push:
     branches:
-      - content-update
+      - content-update  # Run only on pushes to content-update
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
 
-      - name: checkout repo content
-        uses: actions/checkout@v3
+      - name: Checkout repo content
+        uses: actions/checkout@v3  # Check out the repository content
 
-      - name: setup python
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: '3.9'  # Install Python version needed
           
-      - name: install python packages
+      - name: Install Python packages
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Setup hugo
+      - name: Set up Hugo
         uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: "0.110.0"
@@ -32,7 +32,7 @@ jobs:
       - name: Build Website
         run: hugo --minify
 
-      - name: generate PDFs
+      - name: Generate PDFs
         env:
           PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
           RESUME_URL: ${{ vars.RESUME_URL }}
@@ -48,25 +48,18 @@ jobs:
           git config --local user.name "GitHub Action"
           git add static
           git diff-index --quiet HEAD || git commit -m "Updated PDFs"
-          
+
       - name: Push changes to content-update
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: content-update
 
-      - name: Create Pull Request to Main
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          base: main
-          branch: content-update
-          title: "Auto-generated PDF Update"
-          body: "This PR updates the generated PDFs from content-update branch."
-
-      - name: Enable auto-merge on the PR
-        uses: peter-evans/enable-pull-request-automerge@v2
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-number: ${{ steps.Create-Pull-Request-to-Main.outputs.pull-request-number }}
-          merge-method: rebase  # Optional: choose your merge method (merge, squash, or rebase)
+      - name: Reset main to match content-update
+        run: |
+          git fetch origin
+          git checkout content-update
+          git checkout -B main
+          git push origin main --force  # Force push to update main with content-update
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
