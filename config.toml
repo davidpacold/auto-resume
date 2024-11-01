@@ -357,7 +357,7 @@ googleAnalytics = 'G-40ML6KMXQ1'
         tagline = "Automating Workspace ONE UEM with APIs and Events"
 
     [params.information]
-        enable = true
+        enable = false
 
         [[params.information.list]]
         title = "Papers"
