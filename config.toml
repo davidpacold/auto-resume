@@ -381,7 +381,4 @@ googleAnalytics = 'G-40ML6KMXQ1'
         icon = "fab fa-linkedin"
         url = "https://linkedin.com/in/davidpacold"
         title = "/in/davidpacold"
-#        [[params.social.list]]
-#        icon = "fab fa-twitter-square"
-#        url = "https://twitter.com/bascodes"
-#        title = "@bascodes"
+
