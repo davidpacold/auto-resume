@@ -1,4 +1,4 @@
-name: Generate PDFs and Deploy to Cloudflare Pages
+name: Generate PDFs and Deploy to Cloudflare Pages Preview Branch
 
 on:
   push:
@@ -34,7 +34,7 @@ jobs:
         run: hugo --minify
 
       - name: Wait for Deployment to be Ready
-        run: sleep 60  # Add a 2-minute pause to ensure deployment completion
+        run: sleep 120  # Add a 2-minute pause to ensure deployment completion
 
       - name: generate PDFs # run main.py
         env:
