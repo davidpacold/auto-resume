@@ -24,17 +24,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      # - name: Set up Hugo
-      #   uses: peaceiris/actions-hugo@v2
-      #   with:
-      #     hugo-version: "0.110.0"
-      #     extended: true
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.110.0"
+          extended: true
 
-      # - name: Build Website
-      #   run: hugo --minify
+      - name: Build Website
+        run: hugo --minify
 
       - name: Wait for Deployment to be Ready
-        run: sleep 120  # Add a 2-minute pause to ensure deployment completion
+        run: sleep 60  # Add a 2-minute pause to ensure deployment completion
 
       - name: Generate PDFs
         env:
