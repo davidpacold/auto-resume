@@ -65,7 +65,7 @@ jobs:
       #       exit 1
       #     fi
       # Poll Cloudflare API for the preview URL and wait
-      
+
       - name: Retrieve Cloudflare Pages Preview URL
         id: get-preview-url
         env:
@@ -91,7 +91,6 @@ jobs:
             exit 1
           fi
           echo "Sleeping for 120 seconds to ensure the deployment is fully ready..."
-          sleep 120
   
       - name: Wait for Deployment to be Ready
         run: sleep 120
@@ -113,11 +112,17 @@ jobs:
           git add static
           git diff-index --quiet HEAD || git commit -m "Updated PDFs"
 
-      - name: Reset main to match content-update
+      - name: Reset main to match content-update and delete content-update branch
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Fetch latest changes and checkout content-update
           git fetch origin
           git checkout content-update
+  
+          # Reset main branch to match content-update
           git checkout -B main
           git push origin main --force  # Force push to update main with content-update
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+          # Delete content-update branch from the remote
+          git push origin --delete content-update
