@@ -41,6 +41,31 @@ jobs:
           branch: content-update
 
       # Poll Cloudflare API for the preview URL
+      # - name: Retrieve Cloudflare Pages Preview URL
+      #   id: get-preview-url
+      #   env:
+      #     CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      #     CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      #     PROJECT_NAME: "auto-portfolio"  # Replace with your project name
+      #   run: |
+      #     for i in {1..10}; do
+      #       response=$(curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$PROJECT_NAME/deployments" \
+      #         -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+      #         -H "Content-Type: application/json")
+      #       preview_url=$(echo "$response" | jq -r '.result[] | select(.deployment_trigger.metadata.branch=="content-update") | .url' | head -n 1)
+      #       if [ -n "$preview_url" ]; then
+      #         echo "::set-output name=url::$preview_url"
+      #         break
+      #       fi
+      #       echo "Waiting for preview deployment..."
+      #       sleep 30
+      #     done
+      #     if [ -z "$preview_url" ]; then
+      #       echo "Error: Preview URL not found."
+      #       exit 1
+      #     fi
+      # Poll Cloudflare API for the preview URL and wait
+      
       - name: Retrieve Cloudflare Pages Preview URL
         id: get-preview-url
         env:
@@ -55,6 +80,7 @@ jobs:
             preview_url=$(echo "$response" | jq -r '.result[] | select(.deployment_trigger.metadata.branch=="content-update") | .url' | head -n 1)
             if [ -n "$preview_url" ]; then
               echo "::set-output name=url::$preview_url"
+              echo "Preview URL: $preview_url"
               break
             fi
             echo "Waiting for preview deployment..."
@@ -64,10 +90,9 @@ jobs:
             echo "Error: Preview URL not found."
             exit 1
           fi
-
-      - name: Print Preview URL
-        run: echo "Preview URL: ${{ steps.get-preview-url.outputs.url }}"
-
+          echo "Sleeping for 120 seconds to ensure the deployment is fully ready..."
+          sleep 120
+  
       - name: Wait for Deployment to be Ready
         run: sleep 120
   
