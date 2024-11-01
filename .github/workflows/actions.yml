@@ -63,5 +63,5 @@ jobs:
           branch: content-update
           title: "Auto-generated PDF Update"
           body: "This PR updates the generated PDFs from content-update branch."
-          merge_method: squash  # Optional: Choose your preferred merge method (merge, squash, or rebase)
+          merge_method: rebase  # Optional: Choose your preferred merge method (merge, squash, or rebase)
           draft: false  # Optional: Set to true if you want a draft PR
