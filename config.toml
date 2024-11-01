@@ -133,7 +133,7 @@ googleAnalytics = 'G-40ML6KMXQ1'
 
 
     [params.interests]
-        enable = true
+        enable = false
 
         [[params.interests.list]]
         name = "Problem Solving"
