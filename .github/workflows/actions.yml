@@ -3,7 +3,7 @@ name: Generate PDFs and Deploy to Cloudflare Pages
 on:
   push:
     branches:
-      - content-update  # Run on pushes to content-update
+      - content-update
   workflow_dispatch:  # Allow manual trigger
 
 jobs:
@@ -33,10 +33,42 @@ jobs:
       - name: Build Website
         run: hugo --minify
 
+      # Push changes to content-update branch to trigger Cloudflare Pages build
+      - name: Push changes to content-update
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: content-update
+
+      # Poll Cloudflare API for the preview URL
+      - name: Retrieve Cloudflare Pages Preview URL
+        id: get-preview-url
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PROJECT_NAME: "auto-portfolio"  # Replace with your project name
+        run: |
+          for i in {1..10}; do
+            response=$(curl -s -X GET "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$PROJECT_NAME/deployments" \
+              -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+              -H "Content-Type: application/json")
+            preview_url=$(echo "$response" | jq -r '.result[] | select(.deployment_trigger.metadata.branch=="content-update") | .url' | head -n 1)
+            if [ -n "$preview_url" ]; then
+              echo "URL=$preview_url" >> $GITHUB_ENV
+              break
+            fi
+            echo "Waiting for preview deployment..."
+            sleep 30
+          done
+          if [ -z "$preview_url" ]; then
+            echo "Error: Preview URL not found."
+            exit 1
+          fi
+
       - name: Generate PDFs
         env:
           PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
-          RESUME_URL: ${{ vars.RESUME_URL }}
+          RESUME_URL: ${{ env.URL }}  # Use the retrieved preview URL
         run: |
           mkdir -p static_pdf
           python get_pdf.py
@@ -49,12 +81,6 @@ jobs:
           git config --local user.name "GitHub Action"
           git add static
           git diff-index --quiet HEAD || git commit -m "Updated PDFs"
-
-      - name: Push changes to content-update
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: content-update
 
       - name: Reset main to match content-update
         run: |
