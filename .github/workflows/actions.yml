@@ -65,6 +65,25 @@ jobs:
             exit 1
           fi
 
+      - name: Check if Site is Fully Ready
+        env:
+          PREVIEW_URL: ${{ env.URL }}
+        run: |
+          for i in {1..10}; do
+            page_content=$(curl -s "$PREVIEW_URL")
+            if [[ "$page_content" != *"Nothing is here yet"* ]] && [[ "$page_content" != *"may not be ready yet"* ]]; then
+                echo "Site is fully ready!"
+                break
+              fi
+              echo "Waiting for full site readiness (attempt $i)..."
+              sleep 15
+          done
+            if [[ "$page_content" == *"Nothing is here yet"* ]] || [[ "$page_content" == *"may not be ready yet"* ]]; then
+              echo "Error: Site is still not fully ready after multiple attempts."
+              exit 1
+            fi
+  
+
       - name: Generate PDFs
         env:
           PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
