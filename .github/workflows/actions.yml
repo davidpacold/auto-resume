@@ -3,7 +3,8 @@ name: Generate PDFs and Deploy to Cloudflare Pages
 on:
   push:
     branches:
-      - content-update  # Run only on pushes to content-update
+      - content-update  # Run on pushes to content-update
+  workflow_dispatch:  # Allow manual trigger
 
 jobs:
   build:
@@ -11,12 +12,12 @@ jobs:
     steps:
 
       - name: Checkout repo content
-        uses: actions/checkout@v3  # Check out the repository content
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.9'  # Install Python version needed
+          python-version: '3.9'
           
       - name: Install Python packages
         run: |
