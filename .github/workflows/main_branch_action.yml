@@ -36,19 +36,25 @@ jobs:
       - name: Wait for Deployment to be Ready
         run: sleep 60  # Add a 2-minute pause to ensure deployment completion
 
-      - name: Generate PDFs
+      - name: generate PDFs # run main.py
         env:
           PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
-          RESUME_URL: ${{ vars.RESUME_URL }}  # Use the static GitHub variable
+          RESUME_URL: ${{ vars.RESUME_URL }}
         run: |
-          mkdir -p static_pdf
+          mkdir static_pdf
           python get_pdf.py
           cp static_pdf/*.pdf ./static/
           cp static_pdf/*.pdf ./public/
-
+          
       - name: Commit files if PDFs are updated
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add static
-          git diff-index --quiet HEAD || git commit -m "Updated PDFs"
+          git diff-index --quiet HEAD || (git commit -a -m "updated PDFs" --allow-empty)
+          
+      - name: push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main 

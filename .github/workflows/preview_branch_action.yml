@@ -45,10 +45,16 @@ jobs:
           python get_pdf.py
           cp static_pdf/*.pdf ./static/
           cp static_pdf/*.pdf ./public/
-
-      - name: Commit files if PDFs are updated
+          
+      - name: commit files
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add static
-          git diff-index --quiet HEAD || git commit -m "Updated PDFs"
+          git diff-index --quiet HEAD || (git commit -a -m "updated PDFs" --allow-empty)
+          
+      - name: push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: content-update 
