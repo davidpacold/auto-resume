@@ -121,7 +121,7 @@ googleAnalytics = 'G-40ML6KMXQ1'
 #        date = "October 2023"
 
     [params.languages]
-        enable = true
+        enable = false
 
         [[params.languages.list]]
         name = "Tech lingo"
@@ -133,14 +133,14 @@ googleAnalytics = 'G-40ML6KMXQ1'
 
 
     [params.interests]
-        enable = true
+        enable = false
 
         [[params.interests.list]]
         name = "Problem Solving"
         [[params.interests.list]]
         name = "Computer Networking"
         [[params.interests.list]]
-        name = "Hill Climb"
+        name = "Skiing"
 
 
 [params.talks]
