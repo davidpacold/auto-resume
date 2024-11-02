@@ -133,14 +133,14 @@ googleAnalytics = 'G-40ML6KMXQ1'
 
 
     [params.interests]
-        enable = false
+        enable = true
 
         [[params.interests.list]]
-        name = "Problem Solving"
-        [[params.interests.list]]
-        name = "Computer Networking"
-        [[params.interests.list]]
         name = "Skiing"
+        [[params.interests.list]]
+        name = "Swimming"
+        [[params.interests.list]]
+        name = "Surfing"
 
 
 [params.talks]
