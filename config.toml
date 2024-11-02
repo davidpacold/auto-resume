@@ -140,7 +140,7 @@ googleAnalytics = 'G-40ML6KMXQ1'
         [[params.interests.list]]
         name = "Computer Networking"
         [[params.interests.list]]
-        name = "toboggan"
+        name = "Hill Climb"
 
 
 [params.talks]
