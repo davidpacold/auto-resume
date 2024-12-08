@@ -68,11 +68,14 @@ jobs:
           PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
           RESUME_URL: $PREVIEW_URL
         run: |
-          echo "Using PREVIEW_URL as RESUME_URL: $PREVIEW_URL"
+          echo "PREVIEW_URL: $PREVIEW_URL"
+          echo "RESUME_URL: $RESUME_URL"
           mkdir static_pdf
           python get_pdf.py
           cp static_pdf/*.pdf ./static/
-          cp static_pdf/*.pdf ./public/          
+          cp static_pdf/*.pdf ./public/
+
+          
       - name: Commit Files
         run: |
           git config --local user.email "action@github.com"
