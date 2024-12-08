@@ -1,0 +1,60 @@
+name: Re-generate PDFs on Main Branch
+
+on:
+  workflow_dispatch:  # Allow manual trigger
+    inputs:
+      papersize:
+        description: "Paper size for PDF generation (e.g., Letter, A4)"
+        required: false
+        default: "Letter"
+
+jobs:
+  regenerate-pdfs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo content
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.110.0"
+          extended: true
+
+      - name: Build Website
+        run: hugo --minify
+
+      - name: Generate PDFs
+        env:
+          PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
+        run: |
+          echo "Re-generating PDFs for the main branch."
+          mkdir static_pdf
+          export RESUME_URL="https://resume.yourdomain.com" # Update with your production URL
+          echo "Using RESUME_URL: $RESUME_URL"
+          python get_pdf.py --papersize ${{ inputs.papersize }}
+          cp static_pdf/*.pdf ./static/
+          cp static_pdf/*.pdf ./public/
+
+      - name: Commit Files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add static
+          git diff-index --quiet HEAD || (git commit -a -m "Re-generated PDFs on main branch" --allow-empty)
+
+      - name: Push Changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: main
