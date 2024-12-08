@@ -2,8 +2,11 @@ name: Generate PDFs and Deploy to Cloudflare Pages Preview Branch
 
 on:
   push:
-    branches:
-      - content-update  # Run only on the content-update branch
+    branches-ignore:
+      - main  # Ignore pushes to the main branch
+  pull_request:
+    branches-ignore:
+      - main  # Ignore pull requests to the main branch
   workflow_dispatch:  # Allow manual trigger if needed
 
 jobs:
@@ -86,4 +89,4 @@ jobs:
         uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: content-update
+          branch: ${{ github.ref_name }}
