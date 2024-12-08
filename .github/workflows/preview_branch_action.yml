@@ -66,15 +66,14 @@ jobs:
       - name: Generate PDFs
         env:
           PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
-          RESUME_URL: $PREVIEW_URL
         run: |
-          echo "PREVIEW_URL: $PREVIEW_URL"
-          echo "RESUME_URL: $RESUME_URL"
+          echo "Using PREVIEW_URL: $PREVIEW_URL"
+          export RESUME_URL="$PREVIEW_URL"
+          echo "Using RESUME_URL: $RESUME_URL"
           mkdir static_pdf
           python get_pdf.py
           cp static_pdf/*.pdf ./static/
           cp static_pdf/*.pdf ./public/
-
           
       - name: Commit Files
         run: |
