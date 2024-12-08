@@ -1,21 +1,38 @@
-name: Fetch Cloudflare Pages Deployment Status
+name: Generate PDFs and Deploy to Cloudflare Pages Preview Branch
 
 on:
   push:
-    branches-ignore:
-      - main
-  pull_request:
-    branches-ignore:
-      - main
+    branches:
+      - content-update  # Run only on the content-update branch
+  workflow_dispatch:  # Allow manual trigger if needed
 
 jobs:
-  fetch-preview-url:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
+      - name: Checkout repo content
         uses: actions/checkout@v3
 
-      - name: Fetch the latest deployment status from Cloudflare Pages
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          
+      - name: Install Python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.110.0"
+          extended: true
+
+      - name: Build Website
+        run: hugo --minify
+
+      - name: Fetch Cloudflare Pages Preview URL
         run: |
           # Fetch the latest deployment status
           DEPLOYMENT_STATUS=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
@@ -43,21 +60,28 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CLOUDFLARE_PROJECT_NAME: "auto-resume"
 
-      - name: Use Preview URL
-        run: |
-          echo "Using Preview URL: $PREVIEW_URL"
+      - name: Wait for Deployment to be Ready
+        run: sleep 120  # Add a 2-minute pause to ensure deployment completion
 
-      - name: Generate PDF (Example Step)
-        run: |
-          # Example usage of the preview URL for generating a PDF
-          curl -X POST "https://api.pdfservice.com/generate" \
-            -H "Content-Type: application/json" \
-            -d '{
-              "url": "'"$PREVIEW_URL"'",
-              "options": {
-                "papersize": "Letter",
-                "orientation": "Portrait"
-              }
-            }' -o output.pdf
+      - name: Generate PDFs
         env:
-          PDF_API_KEY: ${{ secrets.PDF_API_KEY }}
+          PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
+          RESUME_URL: ${{ vars.PREVIEW_URL }}
+        run: |
+          mkdir static_pdf
+          python get_pdf.py
+          cp static_pdf/*.pdf ./static/
+          cp static_pdf/*.pdf ./public/
+          
+      - name: Commit Files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add static
+          git diff-index --quiet HEAD || (git commit -a -m "Updated PDFs" --allow-empty)
+          
+      - name: Push Changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: content-update
