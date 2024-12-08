@@ -38,7 +38,6 @@ googleAnalytics = 'G-40ML6KMXQ1'
         url = "https://blog.davidpacold.com"
         text = "My blog posts"
 
-
     [params.skills]
         enable = true
 
@@ -65,7 +64,6 @@ googleAnalytics = 'G-40ML6KMXQ1'
         degree = "Bachelor of Applied Science Computer Networking"
         university = "Boise State University"
         dates = "2002 - 2007"
-
 
     [params.awards]
         enable = true
@@ -171,8 +169,13 @@ googleAnalytics = 'G-40ML6KMXQ1'
         enable = true
 
         [[params.experience.list]]
-        title = "Sales Engineer"
-        dates = "January 2022 - Present"
+        title = "Solutions Engineer"
+        dates = "December 2024 - Present"
+        company = "Airia"
+        
+        [[params.experience.list]]
+        title = "Strateic Solutions Engineer"
+        dates = "January 2022 - December 2024"
         company = "Cloudflare"
         details = "As a member of the Solutions Engineering team I serve as a trusted advisor to our customers; helping them find the best solution for their business needs with Cloudflare. I am a trusted source for developing new firewall rules from log files, crafting performance caching and delivery strategies, and creating or repurposing internal tools and scripts for customers."
         [[params.experience.list.items]]
@@ -381,4 +384,3 @@ googleAnalytics = 'G-40ML6KMXQ1'
         icon = "fab fa-linkedin"
         url = "https://linkedin.com/in/davidpacold"
         title = "/in/davidpacold"
-
