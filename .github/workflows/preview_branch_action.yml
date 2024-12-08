@@ -1,74 +1,63 @@
-name: Generate PDFs and Deploy to Cloudflare Pages Preview Branch
+name: Fetch Cloudflare Pages Deployment Status
 
 on:
   push:
-    branches:
-      - content-update  
-  workflow_dispatch:  # Allow manual trigger if needed
+    branches-ignore:
+      - main
+  pull_request:
+    branches-ignore:
+      - main
 
 jobs:
-  build:
+  fetch-preview-url:
     runs-on: ubuntu-latest
     steps:
-
-      - name: Checkout repo content
+      - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.9'
-          
-      - name: Install Python packages
+      - name: Fetch the latest deployment status from Cloudflare Pages
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Set up Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: "0.110.0"
-          extended: true
-
-      - name: Build Website
-        run: hugo --minify
-
-      - name: Wait for Deployment to be Ready
-        run: sleep 120  # Add a 2-minute pause to ensure deployment completion
-
-      # Step to dynamically fetch the Cloudflare Pages preview URL
-      - name: Get Cloudflare Pages Preview URL
-        id: preview_url
-        run: |
-          # Fetch the latest deployment status from Cloudflare Pages
-          DEPLOYMENT_STATUS=$(curl -s -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_KEY }}" \
-            "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/pages/projects/${{ secrets.CLOUDFLARE_PROJECT_NAME }}/deployments")
+          # Fetch the latest deployment status
+          DEPLOYMENT_STATUS=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$CLOUDFLARE_PROJECT_NAME/deployments")
           
-          # Parse the preview URL from the response (assuming 'url' is part of the deployment response)
-          PREVIEW_URL=$(echo $DEPLOYMENT_STATUS | jq -r '.result[0].preview_url')
-          
+          # Log the deployment status for debugging
+          echo "Deployment Status: $DEPLOYMENT_STATUS"
+
+          # Parse the latest preview URL for the "preview" environment
+          PREVIEW_URL=$(echo $DEPLOYMENT_STATUS | jq -r '.result[] | select(.environment == "preview") | .url' | head -n 1)
+
+          # Check if PREVIEW_URL is valid
+          if [[ -z "$PREVIEW_URL" || "$PREVIEW_URL" == "null" ]]; then
+            echo "Error: No valid preview URL found in the API response."
+            exit 1
+          fi
+
           # Set the preview URL as an output
           echo "PREVIEW_URL=$PREVIEW_URL" >> $GITHUB_ENV
-
-      - name: generate PDFs # run main.py
+          
+          # Optionally output it to the console for confirmation
+          echo "Preview URL: $PREVIEW_URL"
         env:
-          PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
-          RESUME_URL: ${{ env.PREVIEW_URL }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_PROJECT_NAME: "auto-resume"
+
+      - name: Use Preview URL
         run: |
-          mkdir static_pdf
-          python get_pdf.py
-          cp static_pdf/*.pdf ./static/
-          cp static_pdf/*.pdf ./public/
-          
-      - name: commit files
+          echo "Using Preview URL: $PREVIEW_URL"
+
+      - name: Generate PDF (Example Step)
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add static
-          git diff-index --quiet HEAD || (git commit -a -m "updated PDFs" --allow-empty)
-          
-      - name: push changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: content-update 
+          # Example usage of the preview URL for generating a PDF
+          curl -X POST "https://api.pdfservice.com/generate" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "url": "'"$PREVIEW_URL"'",
+              "options": {
+                "papersize": "Letter",
+                "orientation": "Portrait"
+              }
+            }' -o output.pdf
+        env:
+          PDF_API_KEY: ${{ secrets.PDF_API_KEY }}
