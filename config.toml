@@ -66,7 +66,6 @@ googleAnalytics = 'G-40ML6KMXQ1'
         university = "Boise State University"
         dates = "2002 - 2007"
 
-
     [params.awards]
         enable = true
 
