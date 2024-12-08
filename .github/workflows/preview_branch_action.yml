@@ -3,7 +3,7 @@ name: Generate PDFs and Deploy to Cloudflare Pages Preview Branch
 on:
   push:
     branches:
-      - content-update  # Run only on pushes to the main branch
+      - content-update  
   workflow_dispatch:  # Allow manual trigger if needed
 
 jobs:
@@ -36,10 +36,24 @@ jobs:
       - name: Wait for Deployment to be Ready
         run: sleep 120  # Add a 2-minute pause to ensure deployment completion
 
+      # Step to dynamically fetch the Cloudflare Pages preview URL
+      - name: Get Cloudflare Pages Preview URL
+        id: preview_url
+        run: |
+          # Fetch the latest deployment status from Cloudflare Pages
+          DEPLOYMENT_STATUS=$(curl -s -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_KEY }}" \
+            "https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/pages/projects/${{ secrets.CLOUDFLARE_PROJECT_NAME }}/deployments")
+          
+          # Parse the preview URL from the response (assuming 'url' is part of the deployment response)
+          PREVIEW_URL=$(echo $DEPLOYMENT_STATUS | jq -r '.result[0].preview_url')
+          
+          # Set the preview URL as an output
+          echo "PREVIEW_URL=$PREVIEW_URL" >> $GITHUB_ENV
+
       - name: generate PDFs # run main.py
         env:
           PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
-          RESUME_URL: ${{ vars.PREVIEW_URL }}
+          RESUME_URL: ${{ env.PREVIEW_URL }}
         run: |
           mkdir static_pdf
           python get_pdf.py
