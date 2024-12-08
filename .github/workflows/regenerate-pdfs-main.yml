@@ -40,7 +40,7 @@ jobs:
         run: |
           echo "Re-generating PDFs for the main branch."
           mkdir static_pdf
-          export RESUME_URL="https://resume.yourdomain.com" # Update with your production URL
+          export RESUME_URL="https://resume.davidpacold.dev" # Update with your production URL
           echo "Using RESUME_URL: $RESUME_URL"
           python get_pdf.py --papersize ${{ inputs.papersize }}
           cp static_pdf/*.pdf ./static/
