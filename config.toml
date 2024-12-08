@@ -38,7 +38,6 @@ googleAnalytics = 'G-40ML6KMXQ1'
         url = "https://blog.davidpacold.com"
         text = "My blog posts"
 
-
     [params.skills]
         enable = true
 
