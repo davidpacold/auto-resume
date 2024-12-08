@@ -13,11 +13,19 @@ at = current_date.isoformat()
 API_KEY = os.environ.get("PDFCO_KEY")
 URL = os.environ.get("RESUME_URL")
 
-# Validate environment variables
+# Validate and fix URL if needed
 if not API_KEY:
     raise ValueError("Environment variable 'PDFCO_KEY' is not set.")
 if not URL:
     raise ValueError("Environment variable 'RESUME_URL' is not set or is invalid.")
+
+# Ensure URL uses HTTPS
+if not URL.startswith("http://") and not URL.startswith("https://"):
+    print(f"URL '{URL}' does not include a scheme. Prepending 'https://'.")
+    URL = f"https://{URL}"
+elif URL.startswith("http://"):
+    print(f"URL '{URL}' uses 'http://'. Updating to 'https://'.")
+    URL = URL.replace("http://", "https://", 1)
 
 def get(fmt="Letter"):
     """Generate a PDF from the given URL using PDF.co API."""
