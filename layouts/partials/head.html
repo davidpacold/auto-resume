@@ -49,10 +49,16 @@
 
 
 
-<!-- Google Analytics internal template -->
-{{- if .Site.GoogleAnalytics }}
-    {{ template "_internal/google_analytics.html" . }}
-{{- end}}
+<!-- Google Analytics -->
+{{- with site.Config.Services.GoogleAnalytics.ID }}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ . }}');
+</script>
+{{- end }}
 
 <!-- Google Fonts -->
 <link

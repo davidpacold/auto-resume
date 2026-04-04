@@ -1,8 +1,10 @@
-import requests
-from pathlib import Path
+import argparse
 import os
 import uuid
 from datetime import datetime
+from pathlib import Path
+
+import requests
 
 # Generate unique ID and timestamp for logs
 uid = uuid.uuid4()
@@ -27,6 +29,7 @@ elif URL.startswith("http://"):
     print(f"URL '{URL}' uses 'http://'. Updating to 'https://'.")
     URL = URL.replace("http://", "https://", 1)
 
+
 def get(fmt="Letter"):
     """Generate a PDF from the given URL using PDF.co API."""
     config = {
@@ -42,20 +45,20 @@ def get(fmt="Letter"):
         "profiles": "{ \"CustomScript\": \";; // put some custom js script here \"}"
     }
     api_url = "https://api.pdf.co/v1/pdf/convert/from/url"
-    
+
     # Send the request to the PDF generation API
     print(f"Sending request to generate PDF for URL: {URL}")
     r = requests.post(api_url, json=config, headers={"x-api-key": API_KEY})
-    
+
     # Check if the request was successful
     if r.status_code != 200:
         print(f"Error in PDF generation request: {r.status_code}")
         print(f"Response: {r.text}")
         return None
-    
+
     result = r.json()
     print(f"API Response: {result}")
-    
+
     # Verify if "url" is in the result
     if "url" not in result:
         print("Error: 'url' key not found in API response.")
@@ -76,15 +79,21 @@ def get(fmt="Letter"):
     print(f"PDF saved to: {output_path}")
     return output_path
 
+
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Generate resume PDF via PDF.co API")
+    parser.add_argument(
+        "--papersize",
+        default="Letter",
+        help="Paper size for PDF generation (e.g., Letter, A4). Defaults to Letter.",
+    )
+    args = parser.parse_args()
+
     # Ensure static_pdf directory exists
     os.makedirs("static_pdf", exist_ok=True)
-    
-    # Generate PDFs in specified formats
-    fmts = ['Letter']
-    for fmt in fmts:
-        pdf_path = get(fmt=fmt)
-        if pdf_path:
-            final_path = Path("static_pdf") / f"resume.{fmt.lower()}.pdf"
-            pdf_path.rename(final_path)
-            print(f"PDF moved to: {final_path}")
+
+    pdf_path = get(fmt=args.papersize)
+    if pdf_path:
+        final_path = Path("static_pdf") / f"resume.{args.papersize.lower()}.pdf"
+        pdf_path.rename(final_path)
+        print(f"PDF moved to: {final_path}")
