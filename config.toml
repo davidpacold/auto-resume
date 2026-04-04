@@ -4,11 +4,13 @@ baseURL = "https://resume.davidpacold.dev/"
 languageCode = "en"
 title = "David Pacold"
 enableGitInfo = false
-googleAnalytics = 'G-40ML6KMXQ1'
+[services]
+  [services.googleAnalytics]
+    ID = 'G-40ML6KMXQ1'
 
 [params]
     author = "David Pacold"
-    description = "My Resume"
+    description = "Product Manager | Solutions Engineer | Enterprise AI"
     og_image = "better-software.png"
 #   twitterName = "@davidpacold"
     ghRepo = "https://github.com/davidpacold/resume/"
@@ -17,7 +19,7 @@ googleAnalytics = 'G-40ML6KMXQ1'
     [params.profile]
         enable = true
         name = "David Pacold"
-        tagline = "My Resume"
+        tagline = "Product Manager | Solutions Engineer | Enterprise AI"
         avatar = "david-pacold-2.jpg"
 
     [params.contact]
@@ -27,7 +29,7 @@ googleAnalytics = 'G-40ML6KMXQ1'
 
         [[params.contact.list]]
         icon = "fas fa-phone-square"
-        url = "tel:"
+        url = "#"
         text = "confidential"
         [[params.contact.list]]
         icon = "fas fa-envelope-square"
@@ -159,6 +161,11 @@ googleAnalytics = 'G-40ML6KMXQ1'
         [[params.talks.list.items]]
         body = "Cloudflare"
 
+        [[params.talks.list]]
+        name = "Speaker at the World of AI Summit, San Francisco 2025"
+        [[params.talks.list.items]]
+        body = "World of AI"
+
 
     [params.summary]
         enable = true
@@ -169,12 +176,26 @@ googleAnalytics = 'G-40ML6KMXQ1'
         enable = true
 
         [[params.experience.list]]
-        title = "Solutions Engineer"
+        title = "Product Manager, DevOps & SecOps"
         dates = "December 2024 - Present"
         company = "Airia"
-        
+        details = "At Airia, an enterprise AI platform startup, I own how the product is built, deployed, and secured — across both Airia's SaaS environments and customer self-hosted deployments. I work cross-functionally with engineering, product, sales, and customers to solve complex deployment challenges and bring enterprise-grade compliance to our AI platform."
+        [[params.experience.list.items]]
+        details = "Lead DevOps and SecOps as Product Manager, owning the roadmap and execution for infrastructure, deployment pipelines, and security operations"
+        [[params.experience.list.items]]
+        details = "Manage and support deployments across Airia's multi-tenant SaaS environment and customer self-hosted infrastructure"
+        [[params.experience.list.items]]
+        details = "Led compliance efforts for SOC 2, HIPAA, and US Data Privacy certifications, coordinating across engineering, legal, and leadership"
+        [[params.experience.list.items]]
+        details = "Managed external penetration testing engagements and remediation workflows"
+        [[params.experience.list.items]]
+        details = "Partner with customers, sales, and engineering to solve deployment challenges and accelerate time-to-value"
+        [[params.experience.list.items]]
+        details = "Support pre-sales by communicating product architecture, deployment options, and security posture to technical and executive stakeholders"
+
+
         [[params.experience.list]]
-        title = "Strateic Solutions Engineer"
+        title = "Strategic Solutions Engineer"
         dates = "January 2022 - December 2024"
         company = "Cloudflare"
         details = "As a member of the Solutions Engineering team I serve as a trusted advisor to our customers; helping them find the best solution for their business needs with Cloudflare. I am a trusted source for developing new firewall rules from log files, crafting performance caching and delivery strategies, and creating or repurposing internal tools and scripts for customers."
@@ -185,9 +206,9 @@ googleAnalytics = 'G-40ML6KMXQ1'
         [[params.experience.list.items]]
         details = "Demonstrated ability to understand and explain complex technical concepts to non-technical stakeholders"
         [[params.experience.list.items]]
-        details = "Proven track record of successfully completing and closing the Technial portion of new business opportunities"
+        details = "Proven track record of successfully completing and closing the Technical portion of new business opportunities"
         [[params.experience.list.items]]
-        details = "Ran technical POC sessions for Cloudflare Application Sercurity, Performance, Network Services and Zero Trust"
+        details = "Ran technical POC sessions for Cloudflare Application Security, Performance, Network Services and Zero Trust"
         [[params.experience.list.items]]
         details = "Experience in creating and delivering technical proposals and RFP responses"
         [[params.experience.list.items]]
@@ -201,17 +222,17 @@ googleAnalytics = 'G-40ML6KMXQ1'
         company = "Nexthink"
         details = "Not just the leader in the digital employee experience category, we invented the category. Our solutions combine real-time analytics, automation and employee feedback across all endpoints to help IT teams delight people at work. Our cloud-native platform pinpoints issues and solutions, automates response, and helps companies continuously improve their employees’ experience, making them more productive, efficient, and happy at work"
         [[params.experience.list.items]]
-        details = "Help the sales team qualify leads by using your deep understanding of product capabilities to address business issues and provide business value."
+        details = "Qualified leads for the sales team by leveraging deep product knowledge to address business problems and articulate value"
         [[params.experience.list.items]]
-        details = "Demonstrate how Nexthink solutions can support overall customer initiatives and how this generates the business outcome."
+        details = "Demonstrated how Nexthink solutions supported overall customer initiatives and drove measurable business outcomes"
         [[params.experience.list.items]]
-        details = "Work with multiple stakeholders in different functions such as End User Computing, Workplace Management, IT Operations and IT Leadership to illustrate use cases where Nexthink can add value. This requires strong account management capability as well as a passion and enthusiasm for introducing disruptive technology."
+        details = "Engaged with stakeholders across End User Computing, Workplace Management, IT Operations, and IT Leadership to illustrate use cases and build champions"
         [[params.experience.list.items]]
-        details = "Support and lead large-scale enterprise transactions as a Solution Consultant by using industry knowledge and understanding to move deals forward"
+        details = "Supported and led large-scale enterprise transactions by applying industry knowledge to advance and close deals"
         [[params.experience.list.items]]
-        details = "Run and facilitate value-based workshops with prospects so that they can fully discover and understand how Nexthink can address their strategic projects and major issues"
+        details = "Ran and facilitated value-based workshops with prospects to help them understand how Nexthink could address their strategic projects and key challenges"
         [[params.experience.list.items]]
-        details = "Conduct Proof of Values"
+        details = "Conducted Proof of Value engagements"
 
         [[params.experience.list]]
         title = "Principal Sales Engineer"
@@ -235,15 +256,13 @@ googleAnalytics = 'G-40ML6KMXQ1'
         title = "Global Staff Solution Architect"
         dates = "2018 - 2021"
         company = "VMware"
-        details = "As a member of the VMware EUC SE Global Pre-Sales team, I evangelized VMware business value and technical benefits to senior level business and technology decision makers at VMware’s largest and most strategic customers as well being instrumental in solution development around Digital Workspace initiatives."
+        details = "As a member of the VMware EUC SE Global Pre-Sales team, I evangelized VMware business value and technical benefits to senior level business and technology decision makers at VMware’s largest and most strategic customers as well as being instrumental in solution development around Digital Workspace initiatives."
         [[params.experience.list.items]]
         details = "Helped evangelize VMware's digital workspace journey story, meeting regularly with leaders across VMware's Global accounts in major verticals (including Telecommunications, Oil and Gas, Manufacturing and Retail) through Executive Briefing Sessions"
         [[params.experience.list.items]]
         details = "Mentored new team members and coached them to be successful in the Global SE role"
         [[params.experience.list.items]]
         details = "Participated in and recorded a Success Story podcast about earning customer trust and becoming a trusted advisor, sharing best practices with colleagues"
-        [[params.experience.list.items]]
-        details = "CTO Ambassador program and Principal Engineer candidate"
         [[params.experience.list.items]]
         details = "Part of the sales team that won one of the largest to date End User Computing deals"
         [[params.experience.list.items]]
@@ -267,11 +286,9 @@ googleAnalytics = 'G-40ML6KMXQ1'
         [[params.experience.list.items]]
         details = "Selected to contribute to a \"future bet\" startup team building VMware's IoT Solution"
         [[params.experience.list.items]]
-        details = "Quickly became a leader among the team and a trusted advisor for both internal and external resource"
+        details = "Quickly became a leader among the team and a trusted advisor for both internal and external resources"
         [[params.experience.list.items]]
         details = "Worked with Partners and the open-source community to develop strategies and product demos"
-        [[params.experience.list.items]]
-        details = "Quickly became a leader among the team and a trusted advisor for both internal and external resources"
         [[params.experience.list.items]]
         details = "Responsible for supporting VMware and other company marketing events, such as Mobile World Congress, Dell World, SAP Sapphire, VMworld"
         [[params.experience.list.items]]
@@ -287,7 +304,7 @@ googleAnalytics = 'G-40ML6KMXQ1'
         [[params.experience.list.items]]
         details = "Drove product features and roadmap, working in partnership with Product Management, Software Engineering, and Marketing"
         [[params.experience.list.items]]
-        details = "Lead key customer facing meeting and events, particularly \"Cx\" level discussions"
+        details = "Led key customer-facing meetings and events, particularly \"Cx\" level discussions"
         [[params.experience.list.items]]
         details = "Delivered solution demonstrations that focused on the customers desired outcomes"
         [[params.experience.list.items]]
@@ -300,7 +317,7 @@ googleAnalytics = 'G-40ML6KMXQ1'
         title = "Enterprise Sales Engineer"
         dates = "2013 - 2017"
         company = "VMware"
-        details = "As a Sales Engineer in End User Computing, we were revolutionizing the way businesses delivered and controlled devices and applications in the enterprise. I was responsible for selling the business value and technical benefits of VMware to senior level business and technology decision makers as well was instrumental in solution development around Digital Workspace initiatives."
+        details = "As a Sales Engineer in End User Computing, we were revolutionizing the way businesses delivered and controlled devices and applications in the enterprise. I was responsible for selling the business value and technical benefits of VMware to senior level business and technology decision makers and was instrumental in solution development around Digital Workspace initiatives."
         [[params.experience.list.items]]
         details = "Performed solution overviews for industry awards, winning the SIIA CODiE award for one of our Mobile Applications"
        [[params.experience.list.items]]
@@ -329,7 +346,7 @@ googleAnalytics = 'G-40ML6KMXQ1'
         [[params.experience.list.items]]
         details = "Deployed solutions leveraging iOS devices in the cockpit of airplanes"
         [[params.experience.list.items]]
-        details = "Lead end-user training though both on-site and remote sessions"
+        details = "Led end-user training through both on-site and remote sessions"
         [[params.experience.list.items]]
         details = "Established clear and accurate project timelines and schedules, earning customer support"
         [[params.experience.list.items]]

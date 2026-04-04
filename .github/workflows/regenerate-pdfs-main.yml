@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo content
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
@@ -26,9 +26,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: Set up Hugo
-        uses: peaceiris/actions-hugo@v2
+        uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: "0.110.0"
+          hugo-version: "0.140.2"
           extended: true
 
       - name: Build Website
@@ -37,12 +37,12 @@ jobs:
       - name: Generate PDFs
         env:
           PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
+          RESUME_URL: "https://resume.davidpacold.dev"
+          PAPERSIZE: ${{ inputs.papersize }}
         run: |
           echo "Re-generating PDFs for the main branch."
-          mkdir static_pdf
-          export RESUME_URL="https://resume.davidpacold.dev" # Update with your production URL
           echo "Using RESUME_URL: $RESUME_URL"
-          python get_pdf.py --papersize ${{ inputs.papersize }}
+          python get_pdf.py --papersize "$PAPERSIZE"
           cp static_pdf/*.pdf ./static/
           cp static_pdf/*.pdf ./public/
 
