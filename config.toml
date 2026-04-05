@@ -14,7 +14,6 @@ enableGitInfo = false
     og_image = "assets/images/2200-david-pacold-2.jpg"
 #   twitterName = "@davidpacold"
     ghRepo = "https://github.com/davidpacold/auto-resume/"
-    hugoRepo = "https://github.com/gohugoio/hugo/"
 
     [params.profile]
         enable = true

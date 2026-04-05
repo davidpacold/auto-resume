@@ -1,19 +1,19 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "David Pacold",
+    "short_name": "Resume",
     "icons": [
         {
-            "src": "/android-chrome-192x192.png",
+            "src": "/android-chrome-192x192.jpg",
             "sizes": "192x192",
-            "type": "image/png"
+            "type": "image/jpeg"
         },
         {
-            "src": "/android-chrome-384x384.png",
+            "src": "/android-chrome-384x384.jpg",
             "sizes": "384x384",
-            "type": "image/png"
+            "type": "image/jpeg"
         }
     ],
-    "theme_color": "#ffffff",
+    "theme_color": "#291e95",
     "background_color": "#ffffff",
     "display": "standalone"
 }

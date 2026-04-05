@@ -73,30 +73,6 @@ $btn-color: #ff0000;
 // 	}
 // }
 
-.pdf-cta {
-	color: $theme-color-primary;
-	font-weight: 400;
-	font-size: small!important;
-	padding-top: 2em;
-	padding-left: 1em;
-
-	padding: 2em;
-
-
-	padding-top: 2em;
-	padding-left: 1em;
-
-}
-.dark {
-	.pdf-cta {
-		color: white;
-	}
-	&.pdf-cta {
-		color: white;
-	}
-}
-
-
 .pdf-link {
 	font-weight: 600;
 	color: $theme-text-color-primary;
@@ -132,7 +108,7 @@ $btn-color: #ff0000;
 	}
 	@page {
 		margin: 2cm;
-		size: 16in 20.5in;
+		size: letter;
 	}
   }
 
@@ -244,6 +220,7 @@ a.theme-link {
 .resume-name {
 	font-size: 2.75rem;
 	font-weight: 900;
+	text-transform: uppercase;
 	letter-spacing: 0.4rem;
 	color: $theme-color-primary;
 	
