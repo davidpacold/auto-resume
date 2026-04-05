@@ -7,9 +7,10 @@ from playwright.sync_api import sync_playwright
 URL = os.environ.get("RESUME_URL", "")
 if not URL:
     raise ValueError("Environment variable 'RESUME_URL' is not set.")
-if URL.startswith("http://"):
+_is_local = "localhost" in URL or "127.0.0.1" in URL
+if not _is_local and URL.startswith("http://"):
     URL = URL.replace("http://", "https://", 1)
-elif not URL.startswith("https://"):
+elif not URL.startswith("http://") and not URL.startswith("https://"):
     URL = f"https://{URL}"
 URL = URL.rstrip("/") + "/"
 
