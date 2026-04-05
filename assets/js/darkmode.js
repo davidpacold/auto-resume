@@ -11,7 +11,6 @@ const setDarkMode = (active = false) => {
         wrapper.remove('dark');
         toggleDarkMode.checked = false;
         darkModeLabel.textContent = 'Dark Mode';
-        localStorage.setItem("theme", "light");
     }
 };
 

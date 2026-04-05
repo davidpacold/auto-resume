@@ -34,15 +34,15 @@ def get(fmt="Letter"):
     """Generate a PDF from the given URL using PDF.co API."""
     config = {
         "url": URL,
-        "margins": "5mm",
+        "margins": "10mm 10mm 10mm 10mm",
         "paperSize": fmt,
         "orientation": "Portrait",
         "printBackground": True,
         "footer": "",
         "mediaType": "print",
+        "viewportWidth": 1440,
         "async": False,
         "encrypt": False,
-        "profiles": "{ \"CustomScript\": \";; // put some custom js script here \"}"
     }
     api_url = "https://api.pdf.co/v1/pdf/convert/from/url"
 
