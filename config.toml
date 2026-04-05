@@ -11,7 +11,7 @@ enableGitInfo = false
 [params]
     author = "David Pacold"
     description = "Product Manager | Solutions Engineer | Enterprise AI"
-    og_image = "better-software.png"
+    og_image = "assets/images/2200-david-pacold-2.jpg"
 #   twitterName = "@davidpacold"
     ghRepo = "https://github.com/davidpacold/resume/"
     hugoRepo = "https://github.com/gohugoio/hugo/"
@@ -44,19 +44,40 @@ enableGitInfo = false
         enable = true
 
         [[params.skills.list]]
-        title = "Technical knowledge"
+        title = "AI & Cloud Platforms"
+        [[params.skills.list.items]]
+        details = "Enterprise AI platforms, LLM orchestration, AI governance and security"
+        [[params.skills.list.items]]
+        details = "AWS, Azure, GCP — SaaS and self-hosted deployment models"
+        [[params.skills.list.items]]
+        details = "Kubernetes, Docker, CI/CD pipelines, infrastructure as code"
+
         [[params.skills.list]]
-        title = "Communication"
+        title = "Security & Compliance"
+        [[params.skills.list.items]]
+        details = "SOC 2, HIPAA, US Data Privacy certifications"
+        [[params.skills.list.items]]
+        details = "Penetration testing management and remediation"
+        [[params.skills.list.items]]
+        details = "Zero Trust, network security, firewall policy development"
+
         [[params.skills.list]]
-        title = "Selling to customer needs"
+        title = "Product & Engineering"
+        [[params.skills.list.items]]
+        details = "Product management — roadmap ownership, cross-functional execution"
+        [[params.skills.list.items]]
+        details = "Technical pre-sales, POC design, RFP responses"
+        [[params.skills.list.items]]
+        details = "REST APIs, scripting, low-code automation tools"
+
         [[params.skills.list]]
-        title = "Presentation and demos"
-        [[params.skills.list]]
-        title = "Problem solving"
-        [[params.skills.list]]
-        title = "Time management"
-        [[params.skills.list]]
-        title = "Teamwork"
+        title = "Communication & Leadership"
+        [[params.skills.list.items]]
+        details = "Executive presentations and technical storytelling"
+        [[params.skills.list.items]]
+        details = "Mentoring and team development"
+        [[params.skills.list.items]]
+        details = "Customer-facing workshops and training delivery"
 
 
     [params.education]
@@ -169,7 +190,7 @@ enableGitInfo = false
 
     [params.summary]
         enable = true
-        text = "Results driven and solutions-oriented Sales Engineer. Proven track record of growing sales and leading the technical sales process. My goal is to work in a challenging position in which I can leverage my experience and passion for technology to establish a role as a technology evangelist, thought leader and advisor to our customers, and those who aren’t, but will be with a little guiding hand. Recognized for my ability to explain complex topics clearly and concisely, and effective at providing practical guidance and maintaining a problem-solver mindset."
+        text = "Technology leader with deep experience across Solutions Engineering, Product Management, and DevOps — most recently owning how an enterprise AI platform is built, deployed, and secured at scale. Proven track record of bridging technical complexity and business value across sales, engineering, and customer success. Hands-on with cloud infrastructure, security compliance (SOC 2, HIPAA), and AI-native product development. Known for explaining complex topics clearly, earning trust as a technical advisor, and thriving in high-growth, fast-moving environments."
 
 
     [params.experience]
