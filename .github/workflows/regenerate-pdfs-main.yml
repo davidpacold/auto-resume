@@ -44,8 +44,9 @@ jobs:
           echo "Re-generating PDFs for the main branch."
           echo "Using RESUME_URL: $RESUME_URL"
           python get_pdf.py
-          cp static_pdf/*.pdf ./static/
-          cp static_pdf/*.pdf ./public/
+          mkdir -p ./static/pdf ./public/pdf
+          cp static_pdf/*.pdf ./static/pdf/
+          cp static_pdf/*.pdf ./public/pdf/
 
       - name: Commit Files
         run: |
