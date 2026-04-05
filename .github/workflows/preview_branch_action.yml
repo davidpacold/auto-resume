@@ -3,11 +3,8 @@ name: Generate PDFs and Deploy to Cloudflare Pages Preview Branch
 on:
   push:
     branches-ignore:
-      - main  # Ignore pushes to the main branch
-  pull_request:
-    branches-ignore:
-      - main  # Ignore pull requests to the main branch
-  workflow_dispatch:  # Allow manual trigger if needed
+      - main  # PDFs committed to branch are included when the PR is merged
+  workflow_dispatch:
 
 jobs:
   build:

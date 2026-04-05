@@ -92,7 +92,7 @@ $background:                #ffffff;
 	}
 
 	.dark-mode-switch {
-		opacity: 0;
+		display: none !important;
 	}
 
 	.resume-wrapper * {
@@ -103,10 +103,31 @@ $background:                #ffffff;
 		position: absolute;
 		left: 0;
 		top: 0;
+		box-shadow: none !important;
+		border: none !important;
+	}
+
+	// Tighten spacing for print
+	.resume-main .item {
+		margin-bottom: 0.6rem !important;
+	}
+
+	.item-content {
+		font-size: 0.8rem !important;
+		line-height: 1.5 !important;
+	}
+
+	.resume-intro {
+		padding-top: 0.5rem !important;
+		padding-bottom: 0.5rem !important;
+	}
+
+	hr {
+		margin: 0.5rem 0 !important;
 	}
 
 	@page {
-		margin: 2cm;
+		margin: 1.5cm;
 		size: letter;
 	}
 }
@@ -212,9 +233,9 @@ a.theme-link {
 
 /*********** Name & Tagline **********/
 .resume-name {
-	font-family: 'Syne', sans-serif;
+	font-family: 'IBM Plex Sans', sans-serif;
 	font-size: 2.6rem;
-	font-weight: 900;
+	font-weight: 700;
 	text-transform: uppercase;
 	letter-spacing: 0.2rem;
 	color: $theme-color-primary;
