@@ -1,103 +1,72 @@
-import argparse
 import os
-import uuid
-from datetime import datetime
 from pathlib import Path
 
-import requests
+from playwright.sync_api import sync_playwright
 
-# Generate unique ID and timestamp for logs
-uid = uuid.uuid4()
-current_date = datetime.now()
-at = current_date.isoformat()
-
-# Fetch environment variables
-API_KEY = os.environ.get("PDFCO_KEY")
-URL = os.environ.get("RESUME_URL")
-
-# Validate and fix URL if needed
-if not API_KEY:
-    raise ValueError("Environment variable 'PDFCO_KEY' is not set.")
+# Fetch and normalise the base URL
+URL = os.environ.get("RESUME_URL", "")
 if not URL:
-    raise ValueError("Environment variable 'RESUME_URL' is not set or is invalid.")
-
-# Ensure URL uses HTTPS
-if not URL.startswith("http://") and not URL.startswith("https://"):
-    print(f"URL '{URL}' does not include a scheme. Prepending 'https://'.")
-    URL = f"https://{URL}"
-elif URL.startswith("http://"):
-    print(f"URL '{URL}' uses 'http://'. Updating to 'https://'.")
+    raise ValueError("Environment variable 'RESUME_URL' is not set.")
+if URL.startswith("http://"):
     URL = URL.replace("http://", "https://", 1)
+elif not URL.startswith("https://"):
+    URL = f"https://{URL}"
+URL = URL.rstrip("/") + "/"
+
+PDF_MARGIN = {"top": "10mm", "right": "10mm", "bottom": "10mm", "left": "10mm"}
+
+# Strip dark mode and any UI-only elements before capture
+PREPARE_PAGE = """
+    document.documentElement.classList.remove('dark');
+    document.querySelectorAll('.d-print-none, .dark-mode-switch')
+        .forEach(function(el) { el.style.display = 'none'; });
+"""
 
 
-def get(fmt="Letter"):
-    """Generate a PDF from the given URL using PDF.co API."""
-    # Use screen mode + viewportWidth so Bootstrap's lg breakpoints fire and the
-    # two-column layout is preserved. CustomScript hides UI-only elements (dark mode
-    # toggle, download links, profile photo) and strips dark class before capture.
-    config = {
-        "url": URL,
-        "margins": "10mm 10mm 10mm 10mm",
-        "paperSize": fmt,
-        "orientation": "Portrait",
-        "printBackground": True,
-        "footer": "",
-        "mediaType": "screen",
-        "viewportWidth": 1440,
-        "async": False,
-        "encrypt": False,
-        "profiles": '{"CustomScript": "document.documentElement.classList.remove(\'dark\'); document.querySelectorAll(\'.d-print-none, .dark-mode-switch\').forEach(function(el){el.style.display=\'none\';});"}',
-    }
-    api_url = "https://api.pdf.co/v1/pdf/convert/from/url"
-
-    # Send the request to the PDF generation API
-    print(f"Sending request to generate PDF for URL: {URL}")
-    r = requests.post(api_url, json=config, headers={"x-api-key": API_KEY})
-
-    # Check if the request was successful
-    if r.status_code != 200:
-        print(f"Error in PDF generation request: {r.status_code}")
-        print(f"Response: {r.text}")
-        return None
-
-    result = r.json()
-    print(f"API Response: {result}")
-
-    # Verify if "url" is in the result
-    if "url" not in result:
-        print("Error: 'url' key not found in API response.")
-        return None
-
-    # Download the PDF
-    download_url = result["url"]
-    print(f"Downloading PDF from: {download_url}")
-    r = requests.get(download_url)
-    if r.status_code != 200:
-        print(f"Error downloading PDF: {r.status_code}")
-        return None
-
-    # Save the downloaded PDF
-    output_path = Path(f"resume.{fmt}.pdf")
-    with open(output_path, "wb") as f:
-        f.write(r.content)
-    print(f"PDF saved to: {output_path}")
-    return output_path
+def render_pdf(browser, url, output_path, viewport_width=1440, screen_media=True):
+    """Navigate to url and save a PDF to output_path."""
+    page = browser.new_page(viewport={"width": viewport_width, "height": 900})
+    if screen_media:
+        page.emulate_media(media="screen")
+    page.goto(url, wait_until="networkidle", timeout=60_000)
+    page.wait_for_timeout(1500)  # Allow web fonts to finish rendering
+    page.evaluate(PREPARE_PAGE)
+    page.pdf(
+        path=str(output_path),
+        format="Letter",
+        margin=PDF_MARGIN,
+        print_background=True,
+    )
+    page.close()
+    print(f"Saved: {output_path}")
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Generate resume PDF via PDF.co API")
-    parser.add_argument(
-        "--papersize",
-        default="Letter",
-        help="Paper size for PDF generation (e.g., Letter, A4). Defaults to Letter.",
-    )
-    args = parser.parse_args()
-
-    # Ensure static_pdf directory exists
     os.makedirs("static_pdf", exist_ok=True)
 
-    pdf_path = get(fmt=args.papersize)
-    if pdf_path:
-        final_path = Path("static_pdf") / f"resume.{args.papersize.lower()}.pdf"
-        pdf_path.rename(final_path)
-        print(f"PDF moved to: {final_path}")
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+
+        # Visual PDF — desktop two-column layout at 1440 px
+        render_pdf(
+            browser,
+            URL,
+            Path("static_pdf") / "resume.letter.pdf",
+            viewport_width=1440,
+            screen_media=True,
+        )
+
+        # ATS PDF — plain single-column layout for HR / applicant tracking systems
+        render_pdf(
+            browser,
+            f"{URL}ats/",
+            Path("static_pdf") / "resume.ats.pdf",
+            viewport_width=1200,
+            screen_media=False,
+        )
+
+        browser.close()
+
+    print("PDF generation complete.")
+    print(f"  Visual : static_pdf/resume.letter.pdf")
+    print(f"  ATS    : static_pdf/resume.ats.pdf")

@@ -5,11 +5,6 @@ on:
     branches:
       - main  # Auto-trigger on merge to main
   workflow_dispatch:  # Allow manual trigger
-    inputs:
-      papersize:
-        description: "Paper size for PDF generation (e.g., Letter, A4)"
-        required: false
-        default: "Letter"
 
 jobs:
   regenerate-pdfs:
@@ -30,6 +25,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Install Playwright browsers
+        run: python -m playwright install --with-deps chromium
+
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v3
         with:
@@ -41,13 +39,11 @@ jobs:
 
       - name: Generate PDFs
         env:
-          PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
           RESUME_URL: "https://resume.davidpacold.dev"
-          PAPERSIZE: ${{ inputs.papersize || 'Letter' }}
         run: |
           echo "Re-generating PDFs for the main branch."
           echo "Using RESUME_URL: $RESUME_URL"
-          python get_pdf.py --papersize "$PAPERSIZE"
+          python get_pdf.py
           cp static_pdf/*.pdf ./static/
           cp static_pdf/*.pdf ./public/
 

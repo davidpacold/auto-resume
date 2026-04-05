@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>{{ .Site.Params.profile.name }}</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11pt;
+      color: #000;
+      background: #fff;
+      padding: 0.6in;
+      line-height: 1.45;
+    }
+    h1 { font-size: 20pt; font-weight: bold; margin-bottom: 3px; }
+    .tagline { font-size: 11pt; margin-bottom: 5px; }
+    .contact { font-size: 10pt; color: #222; margin-bottom: 14px; }
+    .section {
+      margin-top: 14px;
+      margin-bottom: 4px;
+    }
+    .section-title {
+      font-size: 11pt;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-bottom: 1.5px solid #000;
+      padding-bottom: 2px;
+      margin-bottom: 8px;
+    }
+    /* Skills */
+    .skill-group { margin-bottom: 5px; }
+    .skill-title { font-weight: bold; }
+    /* Experience */
+    .job { margin-bottom: 10px; }
+    .job-title { font-weight: bold; font-size: 11pt; }
+    .job-meta { font-size: 10pt; color: #333; margin-bottom: 3px; }
+    .job-desc { margin: 3px 0 4px; }
+    ul { padding-left: 18px; margin: 4px 0; }
+    li { margin-bottom: 2px; }
+    /* Education */
+    .edu-item { margin-bottom: 5px; }
+    /* Awards */
+    .award-list li { margin-bottom: 3px; }
+  </style>
+</head>
+<body>
+
+  <h1>{{ .Site.Params.profile.name }}</h1>
+  <div class="tagline">{{ .Site.Params.profile.tagline }}</div>
+  <div class="contact">
+    {{- $items := .Site.Params.contact.list -}}
+    {{- range $i, $item := $items -}}
+    {{- if $i }} | {{ end -}}
+    {{ $item.text }}
+    {{- end }} | {{ .Site.Params.contact.location }}
+  </div>
+
+  {{- if .Site.Params.summary.enable }}
+  <div class="section">
+    <div class="section-title">Summary</div>
+    <p>{{ .Site.Params.summary.text }}</p>
+  </div>
+  {{- end }}
+
+  {{- if .Site.Params.skills.enable }}
+  <div class="section">
+    <div class="section-title">Skills</div>
+    {{- range .Site.Params.skills.list }}
+    <div class="skill-group">
+      <span class="skill-title">{{ .title }}:</span>
+      {{- range $i, $item := .items -}}
+      {{- if $i }}; {{ end }} {{ $item.details }}
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+  {{- end }}
+
+  {{- if .Site.Params.experience.enable }}
+  <div class="section">
+    <div class="section-title">Work Experience</div>
+    {{- range .Site.Params.experience.list }}
+    <div class="job">
+      <div class="job-title">{{ .title }}</div>
+      <div class="job-meta">{{ .company }} | {{ .dates }}</div>
+      {{- if .details }}<div class="job-desc">{{ .details }}</div>{{ end }}
+      {{- if .items }}
+      <ul>
+        {{- range .items }}<li>{{ .details }}</li>{{ end }}
+      </ul>
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+  {{- end }}
+
+  {{- if .Site.Params.education.enable }}
+  <div class="section">
+    <div class="section-title">Education</div>
+    {{- range .Site.Params.education.list }}
+    <div class="edu-item">
+      <strong>{{ .degree }}</strong> — {{ .university }}{{ if .dates }}, {{ .dates }}{{ end }}
+    </div>
+    {{- end }}
+  </div>
+  {{- end }}
+
+  {{- if .Site.Params.awards.enable }}
+  <div class="section">
+    <div class="section-title">Awards &amp; Recognition</div>
+    <ul class="award-list">
+      {{- range .Site.Params.awards.list }}
+      <li>{{ .name }}{{ if .body }} — {{ .body }}{{ end }}{{ if .date }}, {{ .date }}{{ end }}</li>
+      {{- end }}
+    </ul>
+  </div>
+  {{- end }}
+
+  {{- if .Site.Params.talks.enable }}
+  <div class="section">
+    <div class="section-title">Speaking</div>
+    <ul>
+      {{- range .Site.Params.talks.list }}
+      <li>{{ .name }}</li>
+      {{- end }}
+    </ul>
+  </div>
+  {{- end }}
+
+</body>
+</html>
