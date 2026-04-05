@@ -6,8 +6,11 @@
       ><a class="resume-link" href="{{ .url | safeURL }}">{{ .text }}</a>
     </li>
     {{ end }}
-    <li class="mb-0">
+    <li class="mb-2">
       <i class="fas fa-map-marker-alt fa-fw fa-lg mr-2"></i>{{ .Site.Params.contact.location }}
+    </li>
+    <li class="mb-0">
+      <i class="fas fa-file-pdf fa-fw fa-lg mr-2"></i><a class="resume-link" href="/resume.letter.pdf" download>Download PDF</a>
     </li>
   </ul>
 </div>

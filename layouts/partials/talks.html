@@ -7,8 +7,10 @@
     {{ range .Site.Params.talks.list }}
     <li class="mb-3">
       <div class="font-weight-bold">{{ .name }}</div>
+      {{ range .items }}
       <div class="text-muted">{{ .body }}</div>
-      <div class="text-muted">{{ .date }}</div>
+      {{ end }}
+      {{ with .date }}<div class="text-muted">{{ . }}</div>{{ end }}
     </li>
     {{ end }}
   </ul>

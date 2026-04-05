@@ -10,10 +10,6 @@
 
             <small class="copyright text-muted">Designed with <i class="fas fa-heart"></i> by <a class="theme-link" href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers.</small>
             <br>
-            <small class="copyright">
-                {{ now.Year }} &copy; {{ with .Site.Params.footer.copyright }}{{ . | markdownify }}</br>
-              {{ end }}
-              </br>
+            <small class="copyright">&copy; {{ now.Year }} {{ .Site.Params.author }}</small>
 
-            </small>
         </footer>
