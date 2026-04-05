@@ -32,6 +32,9 @@ elif URL.startswith("http://"):
 
 def get(fmt="Letter"):
     """Generate a PDF from the given URL using PDF.co API."""
+    # Use screen mode + viewportWidth so Bootstrap's lg breakpoints fire and the
+    # two-column layout is preserved. CustomScript hides UI-only elements (dark mode
+    # toggle, download links, profile photo) and strips dark class before capture.
     config = {
         "url": URL,
         "margins": "10mm 10mm 10mm 10mm",
@@ -39,11 +42,11 @@ def get(fmt="Letter"):
         "orientation": "Portrait",
         "printBackground": True,
         "footer": "",
-        "mediaType": "print",
+        "mediaType": "screen",
         "viewportWidth": 1440,
         "async": False,
         "encrypt": False,
-        "profiles": '{"CustomScript": "document.documentElement.classList.remove(\'dark\');"}',
+        "profiles": '{"CustomScript": "document.documentElement.classList.remove(\'dark\'); document.querySelectorAll(\'.d-print-none, .dark-mode-switch\').forEach(function(el){el.style.display=\'none\';});"}',
     }
     api_url = "https://api.pdf.co/v1/pdf/convert/from/url"
 
