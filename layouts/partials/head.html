@@ -16,9 +16,6 @@
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#ffffff">
 
-
-<meta name="referrer" content="unsafe-url" />
-
 <meta property="og:title" content="{{ .Site.Params.author }} – {{ .Site.Params.description }}" />
 <meta name="twitter:title" content="{{ .Site.Params.author }} – {{ .Site.Params.description }}" />
 <meta itemProp="name" content="{{ .Site.Params.author }}" />
@@ -37,17 +34,10 @@
 <meta name="twitter:site" content="{{ .Site.Params.twitterName }}" />
 
 <meta name="twitter:card" content="summary_large_image" />
-
 <meta property="og:type" content="website" />
-
 <meta itemProp="description" content="{{ .Site.Params.description }}" />
 <meta property="og:description" content="{{ .Site.Params.description }}" />
-<meta name="description" content="{{ .Site.Params.description }}" />
 <meta name="twitter:description" content="{{ .Site.Params.description }}" />
-
-<meta name="author" content="{{ .Site.Params.author }}" />
-
-
 
 <!-- Google Analytics -->
 {{- with site.Config.Services.GoogleAnalytics.ID }}
@@ -61,6 +51,8 @@
 {{- end }}
 
 <!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
   rel="stylesheet"
   href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900"
