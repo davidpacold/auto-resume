@@ -1,29 +1,42 @@
-# The resume that builds itself
+# auto-resume
 
-If you want a good looking resume, look no further.
+An automated resume site that generates a PDF on every change.
 
-Just clone that repo, edit `config.toml` and follow the instructions on this blog post to get a nice looking online resume with automated PDFs.
+Built with Hugo, deployed on Cloudflare Pages, with PDF generation via PDF.co and GitHub Actions.
 
-For a detailled breakdown, head over to my [blog post](https://bas.codes/posts/github-actions-resume)
+## Live site
 
-Here is what you need:
+[resume.davidpacold.dev](https://resume.davidpacold.dev)
 
-- An account on netlify (free)
-- An account on pdf.co (free credits available)
-- a domain name 
+## How it works
 
-## How it looks
+1. Edit `config.toml` with your resume content
+2. Push to a branch — GitHub Actions builds the site, waits for Cloudflare Pages to deploy a preview, generates a PDF, and commits it back to the branch
+3. Merge to `main` — Cloudflare Pages deploys to production, GitHub Actions regenerates the PDF against the live URL and commits it
 
-![](screenshot.png)
+## Setup requirements
 
-[https://resume-demo.bas.work](https://resume-demo.bas.work)
+- [Cloudflare Pages](https://pages.cloudflare.com) account (free)
+- [PDF.co](https://pdf.co) account (free credits available)
+- A custom domain (optional)
 
+## GitHub Actions secrets required
+
+| Secret | Description |
+|--------|-------------|
+| `PDFCO_KEY` | PDF.co API key |
+| `CLOUDFLARE_API_TOKEN` | Cloudflare API token with Pages edit permissions |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare account ID |
+
+## Cloudflare Pages environment variables
+
+Set `HUGO_VERSION` to match the version in the workflow files (currently `0.154.5`).
 
 ## Credits
 
-- [Xiaoying Riley](https://themes.3rdwavemedia.com/bootstrap-templates/resume/devcard-bootstrap-5-vcard-portfolio-template-for-software-developers/) for DevCard theme
-- [Coybowsmall](https://github.com/cowboysmall-tools/hugo-devresume-theme) for adapting DevCard to Hugo
+- [Xiaoying Riley](https://themes.3rdwavemedia.com) for the DevResume Bootstrap theme
+- [Cowboysmall](https://github.com/cowboysmall-tools/hugo-devresume-theme) for the Hugo port
+- [Bas Steins](https://bas.codes/posts/github-actions-resume) for the original automation concept
 - [Hugo](https://github.com/gohugoio/hugo) for static site generation
-- [Netlify](https://netlify.com) for hosting
 - [PDF.co](https://pdf.co) for PDF generation
-- [GitHub Actions](https://github.com/features/actions) for automating the deployment
+- [GitHub Actions](https://github.com/features/actions) for CI/CD
