@@ -11,6 +11,7 @@ on:
 
 jobs:
   build:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo content
@@ -39,13 +40,14 @@ jobs:
         run: |
           MAX_RETRIES=30
           RETRY_INTERVAL=10
+          BRANCH_NAME="${{ github.ref_name }}"
 
           for i in $(seq 1 $MAX_RETRIES); do
             DEPLOYMENT_STATUS=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
               "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/$CLOUDFLARE_PROJECT_NAME/deployments")
 
-            DEPLOY_STATE=$(echo $DEPLOYMENT_STATUS | jq -r '[.result[] | select(.environment == "preview")] | .[0].latest_stage.status')
-            PREVIEW_URL=$(echo $DEPLOYMENT_STATUS | jq -r '[.result[] | select(.environment == "preview")] | .[0].url')
+            DEPLOY_STATE=$(echo $DEPLOYMENT_STATUS | jq -r --arg branch "$BRANCH_NAME" '[.result[] | select(.environment == "preview" and .deployment_trigger.metadata.branch == $branch)] | .[0].latest_stage.status')
+            PREVIEW_URL=$(echo $DEPLOYMENT_STATUS | jq -r --arg branch "$BRANCH_NAME" '[.result[] | select(.environment == "preview" and .deployment_trigger.metadata.branch == $branch)] | .[0].url')
 
             echo "Attempt $i/$MAX_RETRIES: state=$DEPLOY_STATE, url=$PREVIEW_URL"
 

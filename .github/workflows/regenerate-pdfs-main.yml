@@ -1,6 +1,9 @@
 name: Re-generate PDFs on Main Branch
 
 on:
+  push:
+    branches:
+      - main  # Auto-trigger on merge to main
   workflow_dispatch:  # Allow manual trigger
     inputs:
       papersize:
@@ -10,6 +13,7 @@ on:
 
 jobs:
   regenerate-pdfs:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo content
@@ -38,7 +42,7 @@ jobs:
         env:
           PDFCO_KEY: ${{ secrets.PDFCO_KEY }}
           RESUME_URL: "https://resume.davidpacold.dev"
-          PAPERSIZE: ${{ inputs.papersize }}
+          PAPERSIZE: ${{ inputs.papersize || 'Letter' }}
         run: |
           echo "Re-generating PDFs for the main branch."
           echo "Using RESUME_URL: $RESUME_URL"
