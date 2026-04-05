@@ -57,19 +57,67 @@ Both workflows check `if: github.actor != 'github-actions[bot]'` to skip re-trig
 ## Local Development
 
 ### Prerequisites
-- Hugo extended 0.154.5+
-- Docker (for local builds on Apple Silicon — use `hugomods/hugo:exts`, NOT `klakegg/hugo` which is amd64-only)
+- Hugo extended 0.154.5+ **OR** Docker (preferred on Apple Silicon)
+- Python 3.10+ with Playwright (for local PDF generation)
 
-### Build
+### Option A — Hugo installed locally
 ```bash
-hugo server  # local dev with live reload
-hugo --minify  # production build → public/
+hugo server              # live reload at http://localhost:1313
+hugo server -D           # include draft content
+hugo --minify            # production build → public/
 ```
 
-### Python (PDF generation)
+### Option B — Docker (Apple Silicon / no local Hugo)
+Use `hugomods/hugo:exts` (multi-arch). **Do NOT use `klakegg/hugo`** — it is amd64-only and will crash on Apple Silicon.
+
 ```bash
-pip install playwright && playwright install chromium
+# Live dev server with hot reload
+docker run --rm -it \
+  -v "$(pwd)":/src \
+  -p 1313:1313 \
+  hugomods/hugo:exts \
+  hugo server --bind 0.0.0.0
+
+# Then open: http://localhost:1313
+```
+
+```bash
+# One-off production build (output in public/)
+docker run --rm \
+  -v "$(pwd)":/src \
+  hugomods/hugo:exts \
+  hugo --minify
+```
+
+### Previewing a branch locally
+```bash
+git checkout <branch-name>
+git pull
+
+# Then run either Hugo option above.
+# The site reflects whatever is in config.toml and layouts/ on that branch.
+```
+
+### PDF generation locally
+Requires Python 3.10+ and Playwright (one-time setup):
+```bash
+pip install playwright==1.51.0
+playwright install chromium
+```
+
+Generate PDFs against the live prod site:
+```bash
 RESUME_URL=https://resume.davidpacold.dev python get_pdf.py
+```
+
+Generate PDFs against a local dev server (start `hugo server` first):
+```bash
+RESUME_URL=http://localhost:1313 python get_pdf.py
+```
+
+PDFs are written to `static_pdf/` (not `static/pdf/`). Copy them manually if you want to commit:
+```bash
+cp static_pdf/*.pdf static/pdf/
 ```
 
 ## Key Files
