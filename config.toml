@@ -29,7 +29,7 @@ enableGitInfo = false
         [[params.contact.list]]
         icon = "fas fa-phone-square"
         url = "#"
-        text = "confidential"
+        text = "Available on request"
         [[params.contact.list]]
         icon = "fas fa-envelope-square"
         url = "mailto:david.pacold@gmail.com"
@@ -37,7 +37,7 @@ enableGitInfo = false
         [[params.contact.list]]
         icon = "fas fa-globe"
         url = "https://blog.davidpacold.com"
-        text = "My blog posts"
+        text = "blog.davidpacold.com"
 
     [params.skills]
         enable = true
@@ -205,9 +205,9 @@ enableGitInfo = false
         [[params.experience.list.items]]
         details = "Manage and support deployments across Airia's multi-tenant SaaS environment and customer self-hosted infrastructure"
         [[params.experience.list.items]]
-        details = "Led compliance efforts for SOC 2, HIPAA, and US Data Privacy certifications, coordinating across engineering, legal, and leadership"
+        details = "Lead compliance efforts for SOC 2, HIPAA, and US Data Privacy certifications, coordinating across engineering, legal, and leadership"
         [[params.experience.list.items]]
-        details = "Managed external penetration testing engagements and remediation workflows"
+        details = "Manage external penetration testing engagements and remediation workflows"
         [[params.experience.list.items]]
         details = "Partner with customers, sales, and engineering to solve deployment challenges and accelerate time-to-value"
         [[params.experience.list.items]]
@@ -218,7 +218,7 @@ enableGitInfo = false
         title = "Strategic Solutions Engineer"
         dates = "January 2022 - December 2024"
         company = "Cloudflare"
-        details = "As a member of the Solutions Engineering team I serve as a trusted advisor to our customers; helping them find the best solution for their business needs with Cloudflare. I am a trusted source for developing new firewall rules from log files, crafting performance caching and delivery strategies, and creating or repurposing internal tools and scripts for customers."
+        details = "As a member of the Solutions Engineering team I served as a trusted advisor to customers, helping them find the best solution for their business needs with Cloudflare. I was a trusted source for developing new firewall rules from log files, crafting performance caching and delivery strategies, and creating or repurposing internal tools and scripts for customers."
         [[params.experience.list.items]]
         details = "Extensive knowledge of Cloudflare's products and services, and the ability to articulate their value proposition to potential customers"
         [[params.experience.list.items]]
@@ -240,7 +240,7 @@ enableGitInfo = false
         title = "Sales Engineer"
         dates = "2021 - 2022"
         company = "Nexthink"
-        details = "Not just the leader in the digital employee experience category, we invented the category. Our solutions combine real-time analytics, automation and employee feedback across all endpoints to help IT teams delight people at work. Our cloud-native platform pinpoints issues and solutions, automates response, and helps companies continuously improve their employees’ experience, making them more productive, efficient, and happy at work"
+        details = "Nexthink is the leader in digital employee experience, combining real-time endpoint analytics, automation, and employee feedback to help IT teams proactively resolve issues and improve workplace technology. As a Sales Engineer I owned the technical sales process across enterprise accounts in the Southeast."
         [[params.experience.list.items]]
         details = "Qualified leads for the sales team by leveraging deep product knowledge to address business problems and articulate value"
         [[params.experience.list.items]]
@@ -304,33 +304,19 @@ enableGitInfo = false
         company = "VMware"
         details = "As the IoT Alliance Architect I was a high impact, very visible and inspirational role in driving a \"future bet\" development of VMware IoT products, influencing new products/solutions, and product improvements that VMware was evaluating bringing to market. I was responsible for engaging with clients at many levels (Solution Architects, VPs, Directors of IT, and Technical Administrators); building relationships, evangelizing VMware solutions, and providing domain expertise to assess go to market viability."
         [[params.experience.list.items]]
-        details = "Selected to contribute to a \"future bet\" startup team building VMware's IoT Solution"
+        details = "Selected to contribute to a \"future bet\" internal startup team building VMware's IoT platform from the ground up"
         [[params.experience.list.items]]
-        details = "Quickly became a leader among the team and a trusted advisor for both internal and external resources"
+        details = "Drove product features and roadmap in partnership with Product Management, Engineering, and Marketing"
         [[params.experience.list.items]]
-        details = "Worked with Partners and the open-source community to develop strategies and product demos"
+        details = "Developed IoT training curriculum and trained ~30 partner engineers across Europe"
         [[params.experience.list.items]]
-        details = "Responsible for supporting VMware and other company marketing events, such as Mobile World Congress, Dell World, SAP Sapphire, VMworld"
+        details = "Created a publicly available VMware Hands-on Lab for the Pulse IoT V1 release"
         [[params.experience.list.items]]
-        details = "Developed an IoT Training curriculum, and trained ~30 individuals from our IoT Partners in Europe"
+        details = "Led C-level customer meetings and represented VMware IoT at Mobile World Congress, Dell World, SAP Sapphire, and VMworld"
         [[params.experience.list.items]]
-        details = "Developed an IoT Training curriculum for internal VMware use and gave 2 rounds of classroom hands on training"
+        details = "Presented a solution overview at VMworld Barcelona 2017"
         [[params.experience.list.items]]
-        details = "Owned the creation of a publicly available VMware Hands on Lab for our Pulse IoT V1 release"
-        [[params.experience.list.items]]
-        details = "Directly responsible for Building and maintained our IoT demo environments used by the team to showcase our solution"
-        [[params.experience.list.items]]
-        details = "Configured and prepared both hardware and software equipment for customer POC's"
-        [[params.experience.list.items]]
-        details = "Drove product features and roadmap, working in partnership with Product Management, Software Engineering, and Marketing"
-        [[params.experience.list.items]]
-        details = "Led key customer-facing meetings and events, particularly \"Cx\" level discussions"
-        [[params.experience.list.items]]
-        details = "Delivered solution demonstrations that focused on the customers desired outcomes"
-        [[params.experience.list.items]]
-        details = "Built and performed custom product demonstrations outlining both the functional and technical value propositions of the solution"
-        [[params.experience.list.items]]
-        details = "Presented a solution overview at the Global VMworld 2017 conference in Barcelona"
+        details = "Built and maintained IoT demo environments and conducted hardware/software POCs for customers and partners"
         
 
         [[params.experience.list]]
@@ -347,7 +333,7 @@ enableGitInfo = false
        [[params.experience.list.items]]
         details = "Drove the Healthcare sales team to be one of the top performing verticals, achieving well over 100% of quota in multiple quarters in 2015"
        [[params.experience.list.items]]
-        details = "I was the Sales Engineer on the largest revenue deal company wide in Q3 of 2014"
+        details = "Sales Engineer on the largest company-wide revenue deal in Q3 2014"
        [[params.experience.list.items]]
         details = "Worked closely with customers to demonstrate the business value of our solutions, not only the technical problem resolution"
        [[params.experience.list.items]]
