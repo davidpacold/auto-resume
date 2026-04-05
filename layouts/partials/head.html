@@ -31,7 +31,7 @@
 <meta property="og:image" content="/{{ .Site.Params.og_image }}" />
 <meta name="twitter:image" content="/{{ .Site.Params.og_image }}" />
 <meta name="twitter:image:src" content="/{{ .Site.Params.og_image }}" />
-<meta name="twitter:site" content="{{ .Site.Params.twitterName }}" />
+{{ with .Site.Params.twitterName }}<meta name="twitter:site" content="{{ . }}" />{{ end }}
 
 <meta name="twitter:card" content="summary_large_image" />
 <meta property="og:type" content="website" />

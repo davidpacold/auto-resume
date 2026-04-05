@@ -1,5 +1,8 @@
 auth.json
 
+# Local Claude Code settings
+.claude/settings.local.json
+
 # Hugo build artifacts
 public/
 resources/_gen/
