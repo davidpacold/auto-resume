@@ -53,6 +53,9 @@ jobs:
               echo "PREVIEW_URL=$PREVIEW_URL" >> $GITHUB_ENV
               echo "Deployment ready: $PREVIEW_URL"
               exit 0
+            elif [[ "$DEPLOY_STATE" == "failure" ]]; then
+              echo "Error: Cloudflare Pages deployment failed. Check the Cloudflare Pages dashboard for build logs."
+              exit 1
             fi
 
             sleep $RETRY_INTERVAL
