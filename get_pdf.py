@@ -43,6 +43,7 @@ def get(fmt="Letter"):
         "viewportWidth": 1440,
         "async": False,
         "encrypt": False,
+        "profiles": '{"CustomScript": "document.documentElement.classList.remove(\'dark\');"}',
     }
     api_url = "https://api.pdf.co/v1/pdf/convert/from/url"
 
