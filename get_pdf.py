@@ -36,11 +36,21 @@ PREPARE_VISUAL = """
 
     var style = document.createElement('style');
     style.textContent = [
+        /* Remove page chrome — body background, container padding, card shadow/margin */
+        'body { background: #fff !important; }',
+        '.container { max-width: 100% !important; padding-left: 0 !important; padding-right: 0 !important; }',
+        '.resume-wrapper { box-shadow: none !important; border: none !important; margin: 0 !important; padding: 1.5rem 2rem !important; }',
+        /* Force two-column layout */
         '.resume-main  { flex: 0 0 66.666% !important; max-width: 66.666% !important; width: 66.666% !important; }',
-        '.resume-aside { flex: 0 0 33.333% !important; max-width: 33.333% !important; width: 33.333% !important; }',
+        '.resume-aside { flex: 0 0 33.333% !important; max-width: 33.333% !important; width: 33.333% !important; word-wrap: break-word !important; overflow-wrap: break-word !important; }',
         '.resume-title   { flex: 0 0 66.666% !important; max-width: 66.666% !important; }',
         '.resume-contact { flex: 0 0 33.333% !important; max-width: 33.333% !important; border-left: 1px solid rgba(0,0,0,0.08) !important; }',
-        '.row { flex-wrap: nowrap !important; }',
+        /* Outer two-column row: no wrap, no negative gutters */
+        '.resume-body > .row { flex-wrap: nowrap !important; margin-left: 0 !important; margin-right: 0 !important; }',
+        /* Inner rows (eg. job title / company-dates): allow wrap so company text stays inside resume-main */
+        '.resume-main .row { margin-left: 0 !important; margin-right: 0 !important; }',
+        /* Scale down name to fit column width at paper width */
+        '.resume-name { font-size: 1.8rem !important; white-space: nowrap !important; }',
     ].join('\\n');
     document.head.appendChild(style);
 """
